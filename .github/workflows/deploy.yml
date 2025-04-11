@@ -88,7 +88,7 @@ jobs:
             # Create the production .env file from GitHub Secrets
             # Create the production .env file from GitHub Secrets or hardcoded values
             echo "--- Creating .env file on EC2 ---"
-            echo "APP_NAME=LMSzai" > .env
+            echo "APP_NAME=MediFlix" > .env
             echo "APP_ENV=production" >> .env
             echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
             echo "APP_DEBUG=false" >> .env
