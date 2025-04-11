@@ -47,7 +47,7 @@ jobs:
           context: .
           file: ./docker/nginx/Dockerfile # Path to your Nginx Dockerfile
           push: true
-          tags: projectdocflix/mediflix:latest 
+          tags: projectdocflix/mediflix-serv:latest 
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -62,14 +62,14 @@ jobs:
         uses: actions/checkout@v4
 
       # Copy the docker-compose.yml file to the EC2 instance
-      - name: Copy docker-compose.yml via SCP
+      - name: Copy docker-compose.prod.yml via SCP
         uses: easingthemes/ssh-deploy@v5.1.0 # Using a specific version
         with:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.EC2_SSH_HOST }}
           REMOTE_USER: ${{ secrets.EC2_SSH_USER }}
-          SOURCE: "docker-compose.yml" # Source file from the repository root
-          TARGET: "~/my-laravel-app"   # Target directory on EC2 (ensure this exists!)
+          SOURCE: "docker-compose.prod.yml" # Source file from the repository root
+          TARGET: "~/my-laravel-app/docker-compose.yml"   # Target directory on EC2 (ensure this exists!)
 
       # Connect to EC2 and execute deployment commands
       - name: Execute deployment commands via SSH

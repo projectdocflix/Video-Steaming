@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # PHP Application Service
+  app:
+    image: projectdocflix/mediflix:latest
+    container_name: laravel_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    networks:
+      - laravelnet
+    # Expose port 9000 internally for Nginx, not needed externally
+    # ports:
+    #   - "9000:9000"
+    depends_on:
+      - db # Ensure DB starts before the app attempts to connect
+
+  # Nginx Web Server Service
+  webserver:
+    image: projectdocflix/mediflix-serv:latest
+    container_name: laravel_webserver
+    restart: unless-stopped
+    ports:
+      - "80:80" # Map host port 80 to container port 80
+      # Add - "443:443" if you configure SSL within the container/Nginx config
+    volumes:
+      - .:/var/www/html # Mount code so Nginx can access the public dir
+      # If using SSL certificates:
+      # - ./docker/nginx/certs:/etc/nginx/certs:ro
+    networks:
+      - laravelnet
+    depends_on:
+      - app
+
+  # MySQL Database Service
+  db:
+    image: mysql:8.0 # Use an official MySQL image
+    container_name: laravel_db
+    restart: unless-stopped
+    ports:
+      - "3307:3306" # Map host port 3307 to container port 3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password_change_me} # Provide a root password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql # Persist database data
+    networks:
+      - laravelnet
+
+# Docker Networks
+networks:
+  laravelnet:
+    driver: bridge
+
+# Named Volume for Persistent Data
+volumes:
+  dbdata:
+    driver: local
