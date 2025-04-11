@@ -1,0 +1,194 @@
+.support {
+    &-section {
+        padding: toRem(120) 0;
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        &-content {
+            .title-wrap {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: toRem(19);
+                padding-bottom: toRem(59);
+                @media screen and (max-width: 767px) {
+                    padding-bottom: toRem(30);
+                }
+                .title {
+                    @include fontFamilyAlt(41, $fw_medium, 1.065, $main-color);
+                    text-align: center;
+                    max-width: toRem(474);
+                    margin: 0 auto !important;
+                    @media screen and (max-width: 991px) {
+                        font-size: toRem(36);
+                    }
+                    @media screen and (max-width: 767px) {
+                        font-size: toRem(34);
+                    }
+                    @media screen and (max-width: 575px) {
+                        font-size: toRem(30);
+                    }
+                }
+                .text {
+                    @include fontFamilyAlt(16, $fw_regular, 1.54, $para-text);
+                    text-align: center;
+                }
+            }
+        }
+    }
+    &-item {
+        &-one {
+            height: 100%;
+            background-color: $white;
+            border-radius: toRem(3);
+            padding: toRem(90) toRem(20);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: toRem(22);
+            @media screen and (max-width: 991px) {
+                padding: toRem(50) toRem(20);
+            }
+            .icon {
+                max-height: toRem(86);
+            }
+            .text-content {
+                .title {
+                    @include fontFamily(21, $fw_medium, 22, $main-color);
+                    padding-bottom: toRem(17);
+                    text-align: center;
+                }
+                .text {
+                    @include fontFamily(16, $fw_regular, 24, $para-text);
+                    text-align: center;
+                    max-width: toRem(258);
+                    margin: 0 auto !important;
+                }
+            }
+        }
+    }
+    &-section {
+        &-cooking {
+            .support {
+                &-section {
+                    &-content {
+                        .title-wrap {
+                            .title {
+                                color: $cooking-primary;
+                            }
+                            .text {
+                                color: $cooking-para-text;
+                            }
+                        }
+                    }
+                }
+                &-item {
+                    &-one {
+                        .text-content {
+                            .title {
+                                color: $cooking-primary;
+                            }
+                            .text {
+                                color: $cooking-para-text;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &-meditation {
+            position: relative;
+            background-color: $meditation-primary;
+            overflow: hidden;
+            &::before {
+                content: "";
+                position: absolute;
+                top: -29px;
+                left: -144px;
+                width: 402px;
+                height: 402px;
+                border-radius: 50%;
+                background-color: $meditation-red;
+                filter: blur(150px);
+                @media screen and (max-width: 991px) {
+                    display: none;
+                }
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -99px;
+                right: -209px;
+                width: 402px;
+                height: 402px;
+                border-radius: 50%;
+                background-color: $meditation-blue;
+                filter: blur(150px);
+                @media screen and (max-width: 991px) {
+                    display: none;
+                }
+            }
+            .support {
+                &-section {
+                    &-content {
+                        .title-wrap {
+                            .title {
+                                color: $white;
+                            }
+                            .text {
+                                color: $white-72;
+                            }
+                        }
+                    }
+                }
+                &-item {
+                    &-one {
+                        .text-content {
+                            .title {
+                                color: $meditation-primary;
+                            }
+                            .text {
+                                color: $meditation-para-text;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &-kindergarten {
+            background-color: $white;
+            padding-top: 0;
+            .support {
+                &-section {
+                    &-content {
+                        .title-wrap {
+                            .title {
+                                color: $kindergarten-primary;
+                            }
+                            .text {
+                                color: $kindergarten-para-text;
+                            }
+                        }
+                    }
+                }
+                &-item {
+                    &-one {
+                        background-color: $kindergarten-coreFeatures;
+                        .text-content {
+                            .title {
+                                color: $kindergarten-primary;
+                            }
+                            .text {
+                                color: $kindergarten-para-text;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

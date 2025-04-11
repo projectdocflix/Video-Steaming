@@ -1,0 +1,94 @@
+.zTab {
+  &-reset {
+    --bs-nav-link-padding-x: 0;
+    --bs-nav-link-padding-y: 0;
+    --bs-nav-link-font-weight: 400;
+    --bs-nav-link-color: #fff;
+    --bs-nav-tabs-border-width: 0;
+    --bs-nav-tabs-border-color: #fff;
+    --bs-nav-tabs-border-radius: 0;
+    --bs-nav-tabs-link-active-color: #fff;
+    --bs-nav-tabs-link-active-bg: #fff;
+    flex-wrap: nowrap;
+    border-bottom: none;
+  }
+  &-vertical {
+    &-one {
+      flex-wrap: wrap;
+      gap: toRem(30);
+      border-left: toRem(1) solid $cooking-red-17;
+      padding-bottom: toRem(20);
+      margin-bottom: toRem(20);
+      @media screen and (max-width: 767px) {
+        border: none;
+        gap: toRem(10);
+      }
+      .nav {
+        &-link {
+          padding: toRem(4) toRem(23);
+          background-color: transparent;
+          border-left: toRem(2) solid transparent;
+          border-radius: 0;
+          white-space: nowrap;
+          display: flex;
+          justify-content: flex-start;
+          @include fontFamily(15, $fw_medium, 23, $cooking-primary);
+          @media screen and (max-width: 767px) {
+            padding: toRem(4) toRem(10);
+            border: none;
+            font-size: toRem(14);
+            border-radius: toRem(5);
+          }
+          &.active {
+            border-color: $cooking-red;
+            background-color: transparent;
+            color: $cooking-red;
+            @media screen and (max-width: 767px) {
+              background-color: $cooking-red;
+              color: $white !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  &-instructorOrganization {
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: toRem(23);
+    background-color: $purple;
+    border-radius: toRem(8);
+    padding: toRem(3);
+    .nav-link {
+      padding: toRem(10) toRem(43);
+      border-radius: toRem(8);
+      @include fontFamily(18, $fw_medium, 27, $white !important);
+      @media screen and (max-width: 767px) {
+        padding: toRem(10) toRem(20);
+        font-size: toRem(16);
+      }
+      &.active {
+        background-color: $white;
+        color: $purple !important;
+      }
+    }
+    &-cooking {
+      background-color: $yellow;
+      .nav-link {
+        color: $cooking-primary !important;
+        &.active {
+          color: $cooking-primary !important;
+        }
+      }
+    }
+    &-kindergarten {
+      background-color: $kindergarten-yellow;
+      .nav-link {
+        color: $white !important;
+        &.active {
+          color: $kindergarten-primary !important;
+        }
+      }
+    }
+  }
+}

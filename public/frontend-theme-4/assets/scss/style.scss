@@ -1,0 +1,280 @@
+/*
+
+Template Name: LMSzai  Responsive  HTML5 Template
+Template URI: https://lmszai.zainikthemes.com/
+Description: LMSzai  Responsive  HTML5 Template
+Developer: Mahmudul Hasan Sohel
+Author URI: https://zainiklab.com/
+Version: 1.0
+
+*/
+// Font
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+// mixin
+@import "mixin/_mixin.scss";
+
+// body reset content
+@import "reset/predefine";
+
+// Hero banner
+@import "./hero-banner";
+// Core Features
+@import "./core-features";
+// Board Section
+@import "./board-section";
+// Course Category
+@import "./course-category";
+// Course items
+@import "./course-items";
+// Top categories
+@import "./top-categories";
+// Product Varity
+@import "./product-varity";
+// Top Instructor
+@import "./top-instructors";
+// Latest Bundle
+@import "./latest-bundle";
+// Upcoming course
+@import "./upcoming-course";
+// Top Rated courses
+@import "./top-rated-courses";
+// Instructor item
+@import "./instructor-item";
+// Price plan
+@import "./price-plan";
+// Testimonial
+@import "./testimonial-item";
+// Support
+@import "./support-item";
+// FAQs
+@import "./faq-item";
+// Form
+@import "./form-item";
+// Header
+@import "./header";
+// Footer
+@import "./footer";
+
+// .sf-toggle {
+//   cursor: pointer;
+//   display: inline-block;
+// }
+// .sf-toggle-switch {
+//   display: inline-block;
+//   background: $price-toggle-bg;
+//   border-radius: 59px;
+//   width: 74px;
+//   height: 35px;
+//   position: relative;
+//   vertical-align: middle;
+//   transition: background 0.25s;
+//   &:before,
+//   &:after {
+//     content: "";
+//   }
+//   &:before {
+//     display: block;
+//     background: $price-toggle-btn;
+//     border-radius: 50%;
+//     width: 39px;
+//     height: 35px;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     transition: left 0.25s;
+//   }
+//   .sf-toggle:hover &:before {
+//     background: $price-toggle-btn;
+//   }
+//   .sf-toggle-checkbox:checked + & {
+//     background: $price-toggle-bg;
+//     &:before {
+//       left: auto;
+//       right: 0;
+//     }
+//   }
+// }
+// .sf-toggle-checkbox {
+//   position: absolute;
+//   visibility: hidden;
+// }
+
+.priceToggle-checkbox {
+  display: none;
+}
+.priceToggle-switch {
+  align-items: center;
+  background-color: $price-toggle-bg;
+  border-radius: 500px;
+  cursor: pointer;
+  display: flex;
+  width: 74px;
+  height: 35px;
+  justify-content: space-between;
+  position: relative;
+  user-select: none;
+  margin: 0 !important;
+}
+.switch__circle {
+  width: 39px;
+  height: 35px;
+  position: absolute;
+  transition: all 0.1s linear;
+}
+.priceToggle-checkbox:checked ~ .priceToggle-switch .switch__circle {
+  left: auto;
+  right: 0;
+}
+.priceToggle-checkbox:not(:checked) ~ .priceToggle-switch .switch__circle {
+  left: 0;
+  right: auto;
+}
+.switch__circle-inner {
+  background-color: $price-toggle-btn;
+  border-radius: 50%;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.price-toggle {
+  &-cooking {
+    .priceToggle-switch {
+      background-color: $cooking-price-toggle-bg;
+    }
+    .switch__circle-inner {
+      background-color: $cooking-price-toggle-btn;
+    }
+  }
+  &-meditation {
+    .priceToggle-switch {
+      background-color: $meditation-price-toggle;
+    }
+    .switch__circle-inner {
+      background-color: $meditation-red;
+    }
+  }
+  &-kindergarten {
+    .priceToggle-switch {
+      background-color: $kindergarten-price-toggle-bg;
+    }
+    .switch__circle-inner {
+      background-color: $kindergarten-price-toggle-btn;
+    }
+  }
+}
+
+.direction-rtl {
+  .fa.fa-arrow-right {
+    transform: rotate(180deg);
+  }
+  .hero-banner {
+    &-content .text-content .sub-title-wrap p::before {
+      right: auto;
+      left: -20px;
+    }
+    &-cooking {
+      .hero {
+        &-banner {
+          &-content {
+            .title {
+              @media screen and (min-width: 992px) {
+                text-align: right;
+              }
+            }
+            .text {
+              @media screen and (min-width: 992px) {
+                text-align: right;
+                margin-right: 0 !important;
+                margin-left: auto !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .zTab {
+    &-vertical {
+      &-one {
+        border-left: 0;
+        border-right: toRem(1) solid $cooking-red-17;
+        .nav {
+          &-link {
+            border-left: 0;
+            border-right: toRem(2) solid transparent;
+            &.active {
+              border-color: $cooking-orange;
+            }
+          }
+        }
+      }
+    }
+  }
+  .price-plan {
+    &-iconPrice {
+      padding-left: 0;
+      padding-right: toRem(75);
+      @media screen and (max-width: 991px) {
+        padding-left: 0;
+        padding-right: toRem(40);
+      }
+      @media screen and (max-width: 767px) {
+        padding-right: 0;
+      }
+    }
+    &-listDivider {
+      @media screen and (min-width: 992px) {
+        padding-left: 0;
+        padding-right: toRem(84);
+      }
+      .plan-divider {
+        left: 0;
+        right: auto;
+        @media screen and (max-width: 767px) {
+          right: auto;
+          left: 50%;
+        }
+      }
+    }
+    &-meditation {
+      &-nav {
+        &-content {
+          .our-plan {
+            left: auto;
+            right: -24px;
+          }
+          @media screen and (max-width: 1023px) {
+            .our-plan {
+              right: auto;
+            }
+          }
+          .our-plan:after {
+            left: auto;
+            right: 0;
+            clip-path: polygon(0 0, 0% 100%, 100% 100%);
+          }
+
+          .green-theme-btn {
+            background-color: $meditation-primary;
+            border-color: $meditation-primary !important;
+            color: $white !important;
+            &:hover {
+              border-color: $meditation-primary;
+              color: $meditation-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+  .testimonial-section-cooking .testimonial-section-content .title-wrap::before {
+    left: 0;
+    right: auto;
+  }
+  .cooking-testimonial-slider .owl-nav {
+    left: 0;
+    right: auto;
+    padding-left: 0;
+    padding-right: 18px;
+  }
+}

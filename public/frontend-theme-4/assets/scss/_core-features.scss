@@ -1,0 +1,157 @@
+.core-features {
+  padding: toRem(120) 0;
+  @media screen and (max-width: 991px) {
+    padding: toRem(80) 0;
+  }
+  @media screen and (max-width: 575px) {
+    padding: toRem(50) 0;
+  }
+  &-lan {
+    background-color: $purple;
+  }
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(59);
+    @media screen and (max-width: 767px) {
+      gap: toRem(30);
+    }
+    .title-wrap {
+      .title {
+        @include fontFamilyAlt(41, $fw_medium, 1.065, $white);
+        @media screen and (max-width: 991px) {
+          text-align: center;
+          max-width: toRem(545);
+          margin: 0 auto !important;
+        }
+        @media screen and (max-width: 991px) {
+          font-size: toRem(36);
+        }
+        @media screen and (max-width: 767px) {
+          font-size: toRem(34);
+        }
+      }
+      .text {
+        max-width: toRem(345);
+        @include fontFamilyAlt(16, $fw_regular, 1.54, $white-72);
+        @media screen and (min-width: 992px) {
+          margin-left: auto !important;
+        }
+        @media screen and (max-width: 991px) {
+          text-align: center;
+          margin: 0 auto !important;
+        }
+      }
+    }
+  }
+  &-item {
+    padding: toRem(35);
+    border: toRem(1) solid #000;
+    border-radius: toRem(4);
+    height: 100%;
+    @media screen and (max-width: 991px) {
+      padding: toRem(30);
+    }
+    height: 100%;
+    @media screen and (max-width: 767px) {
+      padding: toRem(20);
+    }
+    .icon {
+      width: toRem(77);
+      height: toRem(77);
+      margin-bottom: toRem(34);
+      @media screen and (max-width: 767px) {
+        margin-bottom: toRem(20);
+      }
+    }
+    .title {
+      @include fontFamily(21, $fw_regular, 31, $white);
+      padding-bottom: toRem(10);
+    }
+    .text {
+      @include fontFamily(16, $fw_regular, 24.64, $white-72);
+      max-width: toRem(335);
+    }
+    &-lan {
+      border-color: $white-20;
+      background-color: $purple-light;
+    }
+    &-cooking {
+      border-color: $white-20;
+      background-color: $white;
+      .title {
+        color: $cooking-primary;
+      }
+      .text {
+        color: $cooking-para-text;
+      }
+    }
+    &-meditation {
+      border-color: $white-10;
+      background: rgb(12, 12, 13);
+      background: $meditation-core-feature-gradient;
+      .title {
+        color: $white;
+      }
+      .text {
+        color: $white-72;
+      }
+    }
+    &-kindergarten {
+      border-color: $white-20;
+      background-color: $kindergarten-coreFeatures;
+      .title {
+        color: $kindergarten-primary;
+      }
+      .text {
+        color: $kindergarten-para-text;
+      }
+    }
+  }
+  &-cooking {
+    background-color: $cooking-yellow;
+    .core-features {
+      &-content {
+        .title-wrap {
+          .title {
+            color: $cooking-primary;
+          }
+          .text {
+            color: $cooking-primary;
+          }
+        }
+      }
+    }
+  }
+  &-meditation {
+    background-color: $meditation-primary;
+    padding-bottom: 0;
+    .core-features {
+      &-content {
+        .title-wrap {
+          .title {
+            color: $white;
+          }
+          .text {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+  &-kindergarten {
+    background-color: $white;
+    .core-features {
+      &-content {
+        .title-wrap {
+          .title {
+            color: $kindergarten-primary;
+          }
+          .text {
+            color: $kindergarten-para-text;
+          }
+        }
+      }
+    }
+  }
+}

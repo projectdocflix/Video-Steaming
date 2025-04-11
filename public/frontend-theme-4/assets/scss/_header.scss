@@ -1,0 +1,364 @@
+.landing-menu {
+  #mainNav {
+    top: 0;
+  }
+}
+.landing-header {
+  &-learning {
+    #mainNav.sticky {
+      background-color: $main-color;
+      .navbar-nav .nav-item .nav-link {
+        color: $white;
+      }
+    }
+    .nav-home {
+      border-color: $black-10 !important;
+    }
+    .header-nav-left-side:before {
+      background-color: transparent !important;
+    }
+    #librariesDropdown {
+      background-color: $lan-bg;
+      color: $main-color !important;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+      color: $para-text-alt;
+      &:hover {
+        background-color: $white !important;
+      }
+    }
+    .menu-language-btn img {
+      max-width: 27px;
+    }
+    .menu-sign-in-btn .theme-button1 {
+      background-color: $purple;
+      border-color: $purple;
+      color: $white;
+    }
+    .header-nav-left-side form {
+      border-radius: 4px;
+      border-color: $lan-bg;
+      background-color: $lan-bg;
+      width: 100%;
+      max-width: 321px;
+      min-width: 321px;
+      .landing {
+        // #basic-addon1 {
+        //   img {
+        //     filter: brightness(0) invert(1);
+        //   }
+        // }
+        input {
+          &::placeholder {
+            color: $para-text-alt;
+          }
+        }
+      }
+    }
+    .sf-navbar-toggler {
+      border-color: $purple;
+      background-color: $purple !important;
+    }
+    @media screen and (max-width: 991px) {
+      .main-menu-collapse {
+        background-color: $main-color;
+      }
+    }
+  }
+  &-cooking {
+    #mainNav {
+      // background: $lan-bg;
+      &.sticky {
+        background-color: $cooking-red;
+        .navbar-nav .nav-item .nav-link {
+          color: $white;
+        }
+      }
+    }
+    .nav-home {
+      border-color: $black-10 !important;
+    }
+    .header-nav-left-side:before {
+      background-color: transparent !important;
+    }
+    #librariesDropdown {
+      background-color: $cooking-header;
+      color: $cooking-para-text !important;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+      color: $cooking-para-text;
+    }
+    .menu-language-btn img {
+      max-width: 27px;
+    }
+    .menu-sign-in-btn .theme-button1 {
+      background-color: $cooking-red !important;
+      border: 2px solid $cooking-red !important;
+      color: $white !important;
+      &:hover {
+        background-color: $white !important;
+        color: $cooking-red !important;
+      }
+    }
+    .header-nav-left-side form {
+      border-radius: 4px;
+      border-color: $cooking-header;
+      background-color: $cooking-header;
+      width: 100%;
+      max-width: 321px;
+      min-width: 321px;
+      .landing {
+        // #basic-addon1 {
+        //   img {
+        //     filter: brightness(0) invert(1);
+        //   }
+        // }
+        input {
+          &::placeholder {
+            color: $cooking-para-text;
+          }
+        }
+      }
+    }
+    .sf-navbar-toggler {
+      border-color: $cooking-red;
+      background-color: $cooking-red !important;
+    }
+    @media screen and (max-width: 991px) {
+      .main-menu-collapse {
+        background-color: $cooking-red;
+      }
+    }
+  }
+  &-meditation {
+    #mainNav {
+      background: transparent;
+      &.sticky {
+        background-color: $meditation-primary;
+        .navbar-nav .nav-item .nav-link {
+          color: $white;
+        }
+        .menu-sign-in-btn .theme-button1 {
+          background-color: transparent;
+          border-color: $white !important;
+          color: $white !important;
+        }
+      }
+    }
+    .nav-home {
+      border-color: $black-10 !important;
+    }
+    .header-nav-left-side:before {
+      background-color: transparent !important;
+    }
+    #librariesDropdown {
+      background-color: $meditation-header;
+      color: $meditation-primary !important;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+      color: $meditation-para-text;
+    }
+    .menu-language-btn img {
+      max-width: 27px;
+    }
+    .menu-sign-in-btn .theme-button1 {
+      background-color: transparent;
+      border: 2px solid $meditation-primary !important;
+      color: $meditation-primary !important;
+      &:hover {
+        background-color: $meditation-primary !important;
+        color: $white !important;
+      }
+    }
+    .header-nav-left-side form {
+      border-radius: 4px;
+      border-color: $meditation-header;
+      background-color: $meditation-header;
+      width: 100%;
+      max-width: 321px;
+      min-width: 321px;
+      .landing {
+        // #basic-addon1 {
+        //   img {
+        //     filter: brightness(0) invert(1);
+        //   }
+        // }
+        input {
+          &::placeholder {
+            color: $meditation-para-text;
+          }
+        }
+      }
+    }
+    .sf-navbar-toggler {
+      border-color: $white;
+      background-color: $white !important;
+    }
+    @media screen and (max-width: 991px) {
+      .main-menu-collapse {
+        background-color: $meditation-primary;
+      }
+    }
+  }
+  &-kindergarten {
+    #mainNav {
+      background-color: $kindergarten-secondary;
+      &.sticky {
+        background-color: $kindergarten-secondary;
+      }
+    }
+    .nav-home {
+      border-color: $white-20 !important;
+    }
+    .header-nav-left-side:before {
+      background-color: $white-20 !important;
+    }
+    #librariesDropdown {
+      background-color: $kindergarten-header;
+      color: $white !important;
+    }
+    .menu-language-btn img {
+      max-width: 27px;
+    }
+    .menu-sign-in-btn .theme-button1 {
+      background-color: $kindergarten-yellow;
+      border-color: $kindergarten-yellow;
+      color: $kindergarten-primary;
+      border: none !important;
+      &:hover {
+        background-color: $white;
+        color: $kindergarten-yellow !important;
+        border: 1px solid $kindergarten-yellow !important;
+      }
+    }
+    .header-nav-left-side form {
+      border-radius: 4px;
+      border-color: $kindergarten-header;
+      background-color: $kindergarten-header;
+      width: 100%;
+      max-width: 321px;
+      min-width: 321px;
+      .landing {
+        #basic-addon1 {
+          img {
+            filter: brightness(0) invert(1);
+          }
+        }
+        input {
+          &::placeholder {
+            color: $white;
+          }
+        }
+      }
+    }
+    .sf-navbar-toggler {
+      border-color: $kindergarten-header;
+      background-color: $kindergarten-header !important;
+    }
+    @media screen and (max-width: 991px) {
+      .main-menu-collapse {
+        background-color: $kindergarten-secondary;
+      }
+    }
+  }
+}
+.custom-color {
+  .landing-menu {
+    #mainNav {
+      &.sticky {
+        #librariesDropdown {
+          background-color: $white;
+          color: $black !important;
+        }
+        .header-nav-left-side form {
+          border-color: $white;
+          background-color: $white;
+          .landing {
+            #basic-addon1 {
+              img {
+                filter: brightness(1) invert(0);
+              }
+            }
+            input {
+              &::placeholder {
+                color: $para-text;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .landing-header {
+    &-kindergarten {
+      #librariesDropdown {
+        background-color: $white;
+        color: $black !important;
+      }
+      .header-nav-left-side form {
+        border-color: $white;
+        background-color: $white;
+        .landing {
+          #basic-addon1 {
+            img {
+              filter: brightness(1) invert(0);
+            }
+          }
+          input {
+            &::placeholder {
+              color: $para-text;
+            }
+          }
+        }
+      }
+    }
+  }
+  .hero-banner-meditation .hero-banner-content .video-content::before {
+    max-height: 100%;
+  }
+}
+
+.landing-header-learning {
+  .menu-notification-tab-list {
+    padding: 6px 8px !important;
+    .nav-link {
+      color: $black !important;
+      &.active {
+        background-color: $white;
+      }
+    }
+  }
+}
+.landing-header-cooking {
+  .menu-notification-tab-list {
+    padding: 6px 8px !important;
+    .nav-link {
+      color: $cooking-primary !important;
+      &.active {
+        background-color: $white;
+      }
+    }
+  }
+}
+.landing-header-meditation {
+  .menu-notification-tab-list {
+    padding: 6px 8px !important;
+    .nav-link {
+      color: $meditation-primary !important;
+      &.active {
+        background-color: $white;
+      }
+    }
+  }
+}
+.landing-header-kindergarten {
+  .menu-notification-tab-list {
+    padding: 6px 8px !important;
+    .nav-link {
+      color: $kindergarten-primary !important;
+      &.active {
+        background-color: $white;
+      }
+    }
+  }
+}

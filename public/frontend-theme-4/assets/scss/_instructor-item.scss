@@ -1,0 +1,49 @@
+.instructor-item {
+  &-one {
+    height: toRem(360);
+    padding: toRem(8);
+    display: flex;
+    align-items: end;
+    .content {
+      width: 100%;
+      background-color: $white;
+      padding: toRem(16);
+      display: flex;
+      flex-direction: column;
+      gap: toRem(11);
+      .name {
+        @include fontFamily(19, $fw_medium, 20, $main-color);
+      }
+      .degi {
+        @include fontFamily(12, $fw_medium, 13, $para-text);
+        text-transform: uppercase;
+      }
+    }
+  }
+  &-two {
+    .img {
+      position: relative;
+      display: block;
+      height: toRem(227);
+      overflow: hidden;
+      margin-bottom: toRem(21);
+      img {
+        width: 100%;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: toRem(11);
+      .name {
+        display: block;
+        @include fontFamily(19, $fw_medium, 20, $meditation-primary);
+      }
+      .degi {
+        @include fontFamily(12, $fw_medium, 13, $meditation-para-text);
+        text-transform: uppercase;
+        padding-bottom: toRem(8);
+      }
+    }
+  }
+}

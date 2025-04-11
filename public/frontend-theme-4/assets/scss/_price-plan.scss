@@ -1,0 +1,703 @@
+.price-plan {
+    padding: toRem(120) 0;
+    @media screen and (max-width: 991px) {
+        padding: toRem(80) 0;
+    }
+    @media screen and (max-width: 575px) {
+        padding: toRem(50) 0;
+    }
+    &-content {
+        .title-wrap {
+            padding-bottom: toRem(19);
+            .title {
+                @include fontFamilyAlt(41, $fw_medium, 1.065, $main-color);
+                text-align: center;
+                padding-bottom: toRem(11);
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                @include fontFamily(14, $fw_regular, 21.56, $para-text);
+                text-align: center;
+            }
+        }
+    }
+    &-tab-wrap {
+        padding-bottom: toRem(51);
+    }
+    &-items {
+        .price-plan-item {
+            overflow: hidden;
+            margin-bottom: toRem(26);
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    &-item {
+        background-color: $white;
+        border-radius: toRem(4);
+        @media screen and (max-width: 767px) {
+            padding: toRem(20);
+            max-width: toRem(330);
+            margin: 0 auto;
+        }
+    }
+    &-iconPrice {
+        padding-left: toRem(75);
+        @media screen and (max-width: 991px) {
+            padding-left: toRem(40);
+        }
+        @media screen and (max-width: 767px) {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 0;
+        }
+        .iconTitle {
+            margin-bottom: toRem(27);
+            max-width: toRem(80);
+            .title {
+                margin-top: toRem(14);
+                @include fontFamily(18, $fw_medium, 19, $main-color);
+                letter-spacing: -0.01em;
+                text-align: center;
+            }
+        }
+        .planPrice {
+            @include fontFamily(32, $fw_medium, 32, $main-color);
+            letter-spacing: -0.01em;
+            &-yearly-amount {
+                display: none;
+            }
+        }
+    }
+    &-listDivider {
+        position: relative;
+        @media screen and (min-width: 992px) {
+            padding-left: toRem(84);
+        }
+        .plan-divider {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: toRem(35);
+            .line {
+                width: 1px;
+                height: 100%;
+                @media screen and (min-width: 768px) {
+                    border-right: 1px dashed $black-10;
+                }
+                @media screen and (max-width: 767px) {
+                    width: 100%;
+                    height: 1px;
+                    border-bottom: 1px dashed $black-10;
+                }
+            }
+            .circle-top {
+                flex-shrink: 0;
+                width: 45px;
+                height: 45px;
+                background-color: $lan-bg;
+                border-radius: 50%;
+                @media screen and (min-width: 768px) {
+                    margin-top: -25px;
+                }
+            }
+            .circle-bottom {
+                flex-shrink: 0;
+                width: 45px;
+                height: 45px;
+                background-color: $lan-bg;
+                border-radius: 50%;
+                @media screen and (min-width: 768px) {
+                    margin-bottom: -25px;
+                }
+            }
+            @media screen and (max-width: 767px) {
+                top: auto;
+                bottom: 35px;
+                right: auto;
+                left: 50%;
+                transform: translate(-50%, 45%);
+                width: 130%;
+                height: 45px;
+                flex-direction: row;
+            }
+            // img {
+            //   height: 102%;
+            //   @media screen and (max-width: 767px) {
+            //     height: 100%;
+            //   }
+            // }
+        }
+    }
+    &-list {
+        padding: toRem(80) 0;
+        @media screen and (max-width: 767px) {
+            padding-top: toRem(30);
+            max-width: toRem(250);
+            margin: 0 auto;
+        }
+        li {
+            padding-bottom: toRem(24);
+            &:last-child {
+                padding-bottom: 0;
+            }
+            .icon {
+                width: 18px;
+                height: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                font-size: 10px;
+                color: $white;
+                background-color: $purple;
+            }
+            .text {
+                @include fontFamily(18, $fw_medium, 18, $para-text);
+                letter-spacing: -0.01em;
+            }
+        }
+    }
+    &-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .linkBtn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: toRem(14) toRem(28);
+            border-radius: toRem(4);
+            background-color: $purple;
+            @include fontFamily(15, $fw_semiBold, 23, $white);
+        }
+    }
+    &-cooking {
+        background-color: $cooking-yellow;
+        .price-plan {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $cooking-primary;
+                    }
+                    .text {
+                        color: $cooking-primary;
+                    }
+                }
+            }
+            &-list {
+                li {
+                    .icon {
+                        color: $cooking-primary !important;
+                        background-color: $cooking-red !important;
+                    }
+                    .text {
+                        color: $cooking-para-text;
+                    }
+                }
+            }
+            &-item {
+                &-two {
+                    .price {
+                        &-body {
+                            .list {
+                                .icon {
+                                    color: $white;
+                                    background-color: $cooking-red;
+                                }
+                                .text {
+                                    color: $cooking-para-text;
+                                }
+                            }
+                            .priceBtn {
+                                max-width: toRem(136);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .zCheck {
+            &.form-switch {
+                input.form-check-input {
+                    border: none;
+                    background-color: rgba(255, 255, 255, 0.38);
+                    background-image: url(../images/price-switch-cooking.svg);
+                    &:checked {
+                        background-color: rgba(255, 255, 255, 0.38);
+                        border-color: rgba(255, 255, 255, 0.38);
+                    }
+                }
+            }
+        }
+    }
+    &-meditation {
+        padding: toRem(120) 0;
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        .price-plan {
+            &-content {
+                .title-wrap {
+                    padding-bottom: toRem(19);
+                    .title {
+                        @include fontFamilyAlt(
+                            41,
+                            $fw_medium,
+                            1.065,
+                            $meditation-primary
+                        );
+                        text-align: center;
+                        padding-bottom: toRem(11);
+                        @media screen and (max-width: 991px) {
+                            font-size: toRem(36);
+                        }
+                        @media screen and (max-width: 767px) {
+                            font-size: toRem(34);
+                        }
+                    }
+                    .text {
+                        @include fontFamily(
+                            14,
+                            $fw_regular,
+                            21.56,
+                            $meditation-para-text
+                        );
+                        text-align: center;
+                    }
+                }
+            }
+            &-list {
+                li {
+                    .icon {
+                        color: $meditation-primary;
+                        background-color: $meditation-red;
+                    }
+                    .text {
+                        color: $meditation-para-text;
+                    }
+                }
+            }
+        }
+        &-nav {
+            &.saas-plan-instructor-organization-nav {
+                background-color: $meditation-red;
+                width: 332px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 3px;
+                margin-bottom: 23px !important;
+            }
+
+            &.saas-plan-instructor-organization-nav .nav-link {
+                width: 162px;
+                color: $white;
+            }
+
+            &.saas-plan-instructor-organization-nav .nav-link.active,
+            &.saas-plan-instructor-organization-nav .show > .nav-link {
+                color: $white;
+                background-color: $meditation-primary;
+            }
+            .price-table {
+                min-width: 936px;
+                width: 100%;
+            }
+            .plan-switch-month-year-text {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 27px;
+                color: $meditation-primary;
+            }
+            .price-tab-lang {
+                border-radius: 59px;
+                display: flex;
+                background-color: $meditation-price-toggle !important;
+            }
+
+            .price-tab-lang span button {
+                background-color: $meditation-price-toggle !important;
+                border-radius: 59px !important;
+                border: 0;
+                height: 35px;
+                width: 39px;
+            }
+
+            .price-tab-lang span button.active {
+                background-color: $meditation-red !important;
+            }
+
+            .sf-toggle-switch {
+                background: $meditation-price-toggle;
+                &::before {
+                    background: $meditation-red;
+                }
+                // .sf-toggle:hover &:before {
+                //   background: $meditation-red;
+                // }
+                .sf-toggle-checkbox:checked + & {
+                    background: $meditation-price-toggle;
+                }
+            }
+
+            &-content {
+                .price-table {
+                    min-width: 936px;
+                    width: 100%;
+                }
+                .plan-switch-month-year-text {
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 27px;
+                    color: $meditation-primary;
+                }
+                .price-tab-lang {
+                    border-radius: 59px;
+                    display: flex;
+                    background-color: $meditation-price-toggle !important;
+                }
+
+                .price-tab-lang span button {
+                    background-color: $meditation-price-toggle !important;
+                    border-radius: 59px !important;
+                    border: 0;
+                    height: 35px;
+                    width: 39px;
+                }
+
+                .price-tab-lang span button.active {
+                    background-color: $meditation-red !important;
+                }
+                .price-title-bg:hover {
+                    background: 0 0;
+                }
+
+                .price-box-title {
+                    text-align: center;
+                    padding: 48px 0;
+                }
+
+                .price-box-title img {
+                    max-width: 80px;
+                    max-height: 80px;
+                    margin-bottom: 4px;
+                }
+
+                .price-labe {
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 106.5%;
+                    color: $meditation-primary;
+                }
+
+                .price-body-info tr:hover {
+                    background: 0 0;
+                }
+
+                .price-title-body td {
+                    padding: 40px 0;
+                }
+
+                .title-price-list {
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 100%;
+                    color: $meditation-para-text;
+                }
+
+                .price-sub-title {
+                    font-size: 32px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 106.5%;
+                    margin-bottom: 8px;
+                    text-align: center;
+                    color: $meditation-primary;
+                }
+
+                .price-currency {
+                    color: $meditation-para-text;
+                    text-align: center;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 106.5%;
+                }
+
+                .price-body-list th,
+                .price-body-list td {
+                    padding: 31px 0;
+                    border-top: none;
+                    border-bottom: none;
+                    text-align: left;
+                    padding-left: 75px;
+                }
+
+                .price-body-list td {
+                    border-width: 1px;
+                    text-align: center;
+                    padding-left: 0;
+                }
+
+                .price-title-body th > p {
+                    text-align: left;
+                    padding-left: 75px;
+                }
+
+                .price-body-info .price-body-list:nth-child(2) th,
+                .price-body-info .price-body-list:nth-child(2) td {
+                    padding-top: 58px;
+                }
+
+                .price-body-info .price-body-list:nth-last-child(2) th,
+                .price-body-info .price-body-list:nth-last-child(2) td {
+                    padding-bottom: 54px;
+                }
+
+                .price-btu-line td {
+                    padding: 54px 0;
+                    border-top: 1px solid $black-10;
+                }
+
+                .price-title-bg th {
+                    border-width: 1px;
+                }
+
+                .price-title-body td {
+                    border-width: 1px;
+                    width: 180px;
+                }
+
+                .price-btu-line td {
+                    border-width: 1px;
+                }
+
+                .our-plan {
+                    position: absolute;
+                    top: 88px;
+                    left: -24px;
+                    background: $meditation-red;
+                    color: $white;
+                    padding: 10px 20px;
+                    font-size: 41px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 100%;
+                    max-width: 364px;
+                    @media screen and (max-width: 575px) {
+                        font-size: 20px;
+                        padding: 10px;
+                    }
+                }
+
+                @media screen and (max-width: 1023px) {
+                    .our-plan {
+                        left: 0;
+                    }
+                }
+
+                @media screen and (max-width: 1023px) {
+                    .our-plan::after {
+                        display: none;
+                    }
+                }
+
+                .our-plan:after {
+                    content: "";
+                    position: absolute;
+                    top: -18px;
+                    left: 0;
+                    width: 24px;
+                    height: 18px;
+                    background: $meditation-red;
+                    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+                }
+
+                .green-theme-btn {
+                    background-color: $meditation-primary;
+                    border-color: $meditation-primary !important;
+                    color: $white !important;
+                    &:hover {
+                        border-color: $meditation-primary;
+                        color: $meditation-primary;
+                    }
+                }
+            }
+        }
+    }
+    &-item {
+        &-two {
+            height: 100%;
+            background-color: $white;
+            .price {
+                &-head {
+                    padding: toRem(40);
+                    border-bottom: toRem(1) solid $cooking-primary-20;
+                    @media screen and (max-width: 1199px) {
+                        padding: toRem(20);
+                    }
+                    .sub-title {
+                        @include fontFamily(
+                            18,
+                            $fw_medium,
+                            19,
+                            $cooking-primary
+                        );
+                        letter-spacing: -0.01em;
+                        padding-bottom: toRem(18);
+                    }
+                    .planPrice {
+                        @include fontFamily(
+                            32,
+                            $fw_medium,
+                            32,
+                            $cooking-primary
+                        );
+                        letter-spacing: -0.01em;
+                        &.planPrice-yearly-amount {
+                            display: none;
+                        }
+                    }
+                }
+                &-body {
+                    padding: toRem(40);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: toRem(115);
+                    @media screen and (max-width: 1199px) {
+                        padding: toRem(20);
+                        gap: toRem(50);
+                    }
+                    .list {
+                        display: flex;
+                        flex-direction: column;
+                        gap: toRem(24);
+                        .icon {
+                            width: 18px;
+                            height: 18px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+                            font-size: 10px;
+                            color: $white;
+                            background-color: $kindergarten-secondary;
+                        }
+                        .text {
+                            @include fontFamily(
+                                18,
+                                $fw_medium,
+                                18,
+                                $cooking-para-text
+                            );
+                            letter-spacing: -0.01em;
+                        }
+                    }
+                    .priceBtn {
+                        max-width: toRem(136);
+                    }
+                }
+            }
+        }
+    }
+    &-kindergarten {
+        background-color: $white;
+        .price-plan {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $kindergarten-primary;
+                    }
+                    .text {
+                        color: $kindergarten-para-text;
+                    }
+                }
+            }
+            &-item {
+                &-two {
+                    background-color: $kindergarten-coreFeatures;
+                    .price {
+                        &-head {
+                            .sub-title {
+                                color: $kindergarten-primary;
+                            }
+                            .planPrice {
+                                color: $kindergarten-primary;
+                            }
+                        }
+                        &-body {
+                            .list {
+                                .icon {
+                                    background-color: $kindergarten-secondary;
+                                }
+                                .text {
+                                    color: $kindergarten-para-text;
+                                }
+                            }
+                            .priceBtn {
+                                max-width: toRem(136);
+                            }
+                        }
+                    }
+                }
+                &-list {
+                    li {
+                        .icon {
+                            color: $kindergarten-primary;
+                            background-color: $kindergarten-secondary;
+                        }
+                        .text {
+                            color: $kindergarten-para-text;
+                        }
+                    }
+                }
+                &-tab-wrap {
+                    .text-main-color {
+                        color: $kindergarten-primary;
+                    }
+                }
+            }
+            .zCheck {
+                &.form-switch {
+                    input.form-check-input {
+                        border: none;
+                        background-color: rgba(40, 143, 138, 0.2);
+                        background-image: url(../images/price-switch-kindergarten.svg);
+                        &:checked {
+                            background-color: rgba(40, 143, 138, 0.2);
+                            border-color: rgba(40, 143, 138, 0.2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 991px) {
+        .overflow-x-scroll {
+            overflow-x: scroll;
+        }
+    }
+}

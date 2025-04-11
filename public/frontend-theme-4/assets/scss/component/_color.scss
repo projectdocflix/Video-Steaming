@@ -1,0 +1,68 @@
+$theme-colors: (
+  "white": var(--white),
+  "white-10": var(--white-10),
+  "white-20": var(--white-20),
+  "white-55": var(--white-55),
+  "white-65": var(--white-65),
+  "white-72": var(--white-72),
+  "black": var(--black),
+  "black-10": var(--black-10),
+  "main-color": var(--main-color),
+  "main-color-8": var(--main-color-8),
+  "secondary-color": var(--secondary-color),
+  "red": var(--red),
+  "para-text": var(--para-text),
+  "yellow": var(--yellow),
+  "yellow-1": var(--yellow-1),
+  "purple": var(--purple),
+  "green": var(--green),
+  "purple-light": var(--purple-light),
+  "section-bg": var(--section-bg),
+  "lan-bg": var(--lan-bg),
+  "faq-header": var(--faq-header),
+  "cooking-primary": var(--cooking-primary),
+  "cooking-primary-20": var(--cooking-primary-20),
+  "cooking-para-text": var(--cooking-para-text),
+  "cooking-red": var(--cooking-red),
+  "cooking-red-17": var(--cooking-red-17),
+  "cooking-discount": var(--cooking-discount),
+  "cooking-yellow": var(--cooking-yellow),
+  "cooking-orange": var(--cooking-orange),
+  "cooking-header": var(--cooking-header),
+  "meditation-primary": var(--meditation-primary),
+  "meditation-secondary": var(--meditation-secondary),
+  "meditation-para-text": var(--meditation-para-text),
+  "meditation-red": var(--meditation-red),
+  "meditation-yellow": var(--meditation-yellow),
+  "meditation-blue": var(--meditation-blue),
+  "meditation-header": var(--meditation-header),
+  "meditation-faq-header": var(--meditation-faq-header),
+  "meditation-testi-bg-20": var(--meditation-testi-bg-20),
+  "meditation-price-toggle": var(--meditation-price-toggle),
+  "kindergarten-primary": var(--kindergarten-primary),
+  "kindergarten-para-text": var(--kindergarten-para-text),
+  "kindergarten-secondary": var(--kindergarten-secondary),
+  "kindergarten-secondary-light": var(--kindergarten-secondary-light),
+  "kindergarten-white-alt": var(--kindergarten-white-alt),
+  "kindergarten-coreFeatures": var(--kindergarten-coreFeatures),
+  "kindergarten-yellow": var(--kindergarten-yellow),
+  "kindergarten-header": var(--kindergarten-header),
+  "kindergarten-disable": var(--kindergarten-disable),
+);
+@each $key, $color in $theme-colors {
+  .text-#{$key} {
+    color: $color !important;
+  }
+}
+/* Background Color */
+@each $key, $color in $theme-colors {
+  .bg-#{$key} {
+    background-color: $color !important;
+  }
+}
+/* Border Color */
+@each $key, $color in $theme-colors {
+  .bd-c-#{$key} {
+    border-color: $color !important;
+  }
+}

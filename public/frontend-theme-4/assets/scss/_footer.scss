@@ -1,0 +1,158 @@
+.landing-footer {
+  &-learning {
+    background: $purple;
+    .section-overlay {
+      background: none;
+    }
+    .footer-widget {
+      &.footer-about {
+        p {
+          color: $white-65;
+        }
+      }
+      .footer-widget-title {
+        padding-bottom: toRem(28);
+      }
+      .footer-links {
+        li a,
+        ul li {
+          color: $white-65;
+        }
+      }
+    }
+    .footer-contact-info ul li .iconify {
+      color: $yellow;
+    }
+    .copyright-text p {
+      color: $white-65 !important;
+    }
+    .footer-bottom-nav ul li a {
+      color: $white-65;
+    }
+  }
+  &-cooking {
+    background: $cooking-primary;
+    .section-overlay {
+      background: none;
+    }
+    .footer-widget {
+      &.footer-about {
+        p {
+          color: $white-65;
+        }
+      }
+      .footer-widget-title {
+        padding-bottom: toRem(28);
+      }
+      .footer-links {
+        li a,
+        ul li {
+          color: $white-65;
+        }
+      }
+    }
+    .footer-contact-info ul li .iconify {
+      color: $cooking-red;
+    }
+    .copyright-text p {
+      color: $white-65 !important;
+    }
+    .footer-bottom-nav ul li a {
+      color: $white-65;
+    }
+  }
+  &-meditation {
+    position: relative;
+    background: $meditation-primary;
+    overflow: hidden;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      left: -234px;
+      width: 402px;
+      height: 402px;
+      border-radius: 50%;
+      background-color: $meditation-red;
+      filter: blur(150px);
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 417px;
+      right: -145px;
+      width: 402px;
+      height: 402px;
+      border-radius: 50%;
+      background-color: $meditation-yellow;
+      filter: blur(150px);
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+    }
+    .section-overlay {
+      position: relative;
+      background: none;
+      z-index: 1;
+    }
+    .footer-widget {
+      &.footer-about {
+        p {
+          color: $white-65;
+        }
+      }
+      .footer-widget-title {
+        padding-bottom: toRem(28);
+      }
+      .footer-links {
+        li a,
+        ul li {
+          color: $white-65;
+        }
+      }
+    }
+    .footer-contact-info ul li .iconify {
+      color: $meditation-red;
+    }
+    .copyright-text p {
+      color: $white-65 !important;
+    }
+    .footer-bottom-nav ul li a {
+      color: $white-65;
+    }
+  }
+  &-kindergarten {
+    background: $kindergarten-secondary;
+    .section-overlay {
+      background: none;
+    }
+    .footer-widget {
+      &.footer-about {
+        p {
+          color: $white-65;
+        }
+      }
+      .footer-widget-title {
+        padding-bottom: toRem(28);
+      }
+      .footer-links {
+        li a,
+        ul li {
+          color: $white-65;
+        }
+      }
+    }
+    .footer-contact-info ul li .iconify {
+      color: $kindergarten-yellow;
+    }
+    .copyright-text p {
+      color: $white-65 !important;
+    }
+    .footer-bottom-nav ul li a {
+      color: $white-65;
+    }
+  }
+}

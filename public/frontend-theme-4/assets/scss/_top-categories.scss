@@ -1,0 +1,226 @@
+.top-categories {
+    &-lan {
+        padding: toRem(120) 0;
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+    }
+    &-content {
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: toRem(54);
+            .icon {
+                margin-bottom: toRem(11);
+            }
+            .title {
+                @include fontFamily(41, $fw_medium, 43.67, $white);
+                padding-bottom: toRem(14);
+                text-align: center;
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                @include fontFamily(14, $fw_medium, 21, $white);
+                text-align: center;
+            }
+        }
+    }
+    &-item {
+        padding: toRem(33) toRem(38);
+        border: toRem(1) solid $white-20;
+        border-radius: toRem(4);
+        background-color: $purple-light;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: toRem(22);
+        @media screen and (max-width: 767px) {
+            padding: toRem(20);
+        }
+        .icon {
+            flex-shrink: 0;
+            width: toRem(60);
+            height: toRem(60);
+        }
+        .title {
+            @include fontFamily(21, $fw_medium, 22.37, $white);
+            padding-bottom: toRem(11);
+        }
+        .text {
+            @include fontFamily(13, $fw_medium, 20, $white-72);
+        }
+    }
+    &-meditation {
+        position: relative;
+        // padding: toRem(120) 0;
+        // @media screen and (max-width: 991px) {
+        //   padding: toRem(80) 0;
+        // }
+        // @media screen and (max-width: 575px) {
+        //   padding: toRem(50) 0;
+        // }
+        .top-categories {
+            &-content {
+                .title-wrap {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: toRem(19);
+                    padding-bottom: toRem(59);
+                    @media screen and (max-width: 767px) {
+                        padding-bottom: toRem(30);
+                    }
+                    .title {
+                        @include fontFamilyAlt(
+                            41,
+                            $fw_medium,
+                            1.065,
+                            $meditation-primary
+                        );
+                        text-align: center;
+                        max-width: toRem(474);
+                        margin: 0 auto !important;
+                        @media screen and (max-width: 991px) {
+                            font-size: toRem(36);
+                        }
+                        @media screen and (max-width: 767px) {
+                            font-size: toRem(34);
+                        }
+                    }
+                    .text {
+                        @include fontFamilyAlt(
+                            16,
+                            $fw_regular,
+                            1.54,
+                            $meditation-para-text
+                        );
+                        text-align: center;
+                    }
+                }
+            }
+            &-item {
+                border-color: $white-10;
+                background-color: $white;
+                .title {
+                    color: $meditation-primary;
+                }
+                .text {
+                    color: $meditation-para-text;
+                }
+            }
+        }
+    }
+    &-kindergarten {
+        position: relative;
+        padding: toRem(234) 0 toRem(108);
+        background-color: $kindergarten-secondary-light;
+        @media screen and (max-width: 1450px) {
+            padding-top: toRem(200);
+        }
+        @media screen and (max-width: 1300px) {
+            padding-top: toRem(130);
+        }
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        .wave-img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: auto;
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
+        }
+        .top-categories {
+            &-content {
+                .title-wrap {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding-bottom: toRem(54);
+                    .icon {
+                        margin-bottom: toRem(11);
+                    }
+                    .title {
+                        @include fontFamily(
+                            41,
+                            $fw_medium,
+                            43.67,
+                            $kindergarten-primary
+                        );
+                        padding-bottom: toRem(14);
+                        text-align: center;
+                        @media screen and (max-width: 991px) {
+                            font-size: toRem(36);
+                        }
+                        @media screen and (max-width: 767px) {
+                            font-size: toRem(34);
+                        }
+                    }
+                    .text {
+                        @include fontFamily(
+                            14,
+                            $fw_medium,
+                            21,
+                            $kindergarten-para-text
+                        );
+                        text-align: center;
+                    }
+                }
+            }
+            &-item {
+                padding: toRem(33) toRem(38);
+                border: toRem(1) solid $white-10;
+                border-radius: toRem(4);
+                background-color: $white;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                gap: toRem(22);
+                @media screen and (max-width: 767px) {
+                    padding: toRem(20);
+                }
+                .icon {
+                    flex-shrink: 0;
+                    width: toRem(60);
+                    height: toRem(60);
+                }
+                .title {
+                    @include fontFamily(
+                        21,
+                        $fw_medium,
+                        22.37,
+                        $kindergarten-primary
+                    );
+                    padding-bottom: toRem(11);
+                }
+                .text {
+                    @include fontFamily(
+                        13,
+                        $fw_medium,
+                        20,
+                        $kindergarten-para-text
+                    );
+                }
+            }
+        }
+    }
+}

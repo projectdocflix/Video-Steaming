@@ -1,0 +1,225 @@
+.latest-bundle {
+    padding: 0 0 toRem(120);
+    @media screen and (max-width: 991px) {
+        padding: 0 0 toRem(80);
+    }
+    @media screen and (max-width: 575px) {
+        padding: 0 0 toRem(50);
+    }
+    &-content {
+        .title-wrap {
+            padding-bottom: toRem(48);
+            .title {
+                @include fontFamilyAlt(41, $fw_medium, 1.065, $main-color);
+                padding-bottom: toRem(11);
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                @include fontFamily(14, $fw_regular, 21.56, $para-text);
+            }
+        }
+    }
+    &-cooking {
+        padding: toRem(120) 0;
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        .latest-bundle {
+            &-content {
+                .title-wrap {
+                    padding-bottom: toRem(48);
+                    .title {
+                        color: $cooking-primary;
+                    }
+                    .text {
+                        color: $cooking-para-text;
+                    }
+                }
+            }
+        }
+    }
+    &-meditation {
+        padding: toRem(120) 0;
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        .latest-bundle {
+            &-content {
+                .title-wrap {
+                    padding-bottom: toRem(48);
+                    .title {
+                        color: $meditation-primary;
+                    }
+                    .text {
+                        color: $meditation-para-text;
+                    }
+                }
+            }
+        }
+    }
+    &-kindergarten {
+        background-color: $white;
+        padding: toRem(120) 0;
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        .latest-bundle {
+            &-content {
+                .title-wrap {
+                    padding-bottom: toRem(48);
+                    .title {
+                        color: $kindergarten-primary;
+                    }
+                    .text {
+                        color: $kindergarten-para-text;
+                    }
+                }
+            }
+        }
+        .course-item {
+            &-three {
+                background-color: $kindergarten-coreFeatures;
+                .content {
+                    > .title {
+                        color: $kindergarten-primary;
+                    }
+                    .author {
+                        color: $kindergarten-para-text;
+                    }
+                    .rating-wrap {
+                        .no {
+                            color: $kindergarten-primary;
+                        }
+                        .totalRating {
+                            color: $kindergarten-para-text;
+                        }
+                    }
+                    .price {
+                        color: $kindergarten-primary;
+                        // .discountPrice {
+                        //   color: $kindergarten-secondary !important;
+                        // }
+                        // .regularPrice {
+                        //   color: $kindergarten-disable !important;
+                        //   text-decoration: line-through;
+                        // }
+
+                        .discountPrice {
+                            color: $meditation-seconday !important;
+                        }
+                        .regularPrice {
+                            color: $meditation-seconday !important;
+                        }
+                        &:has(.discountPrice) {
+                            .regularPrice {
+                                color: $meditation-disable !important;
+                                text-decoration: line-through;
+                            }
+                        }
+                    }
+                    .cashback {
+                        background-color: $white;
+                        .title {
+                            color: $kindergarten-primary;
+                        }
+                        .amount {
+                            color: $kindergarten-secondary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.latest-courses-slider {
+    .owl-nav {
+        position: absolute;
+        right: 0;
+        bottom: -22px;
+        background: var(--page-bg);
+        padding-left: toRem(10);
+        button {
+            width: 50px;
+            height: 50px;
+            background: var(--white-color) !important;
+            border: 1px solid var(--border-color2) !important;
+            border-radius: 50%;
+            margin: 0 4px;
+            &:hover {
+                background: var(--theme-color) !important;
+                svg path {
+                    fill: var(--white-color) !important;
+                }
+            }
+        }
+    }
+}
+.product-varity-cooking {
+    .latest-courses-slider {
+        padding-bottom: 60px;
+        .owl-stage-outer {
+            overflow: visible;
+        }
+        .owl-nav {
+            position: absolute;
+            right: -18px;
+            bottom: -22px;
+            background: transparent;
+            padding-left: toRem(10);
+            width: auto;
+            button {
+                width: 50px;
+                height: 50px;
+                background: var(--white-color) !important;
+                border: 1px solid var(--border-color2) !important;
+                border-radius: 50%;
+                margin: 0 4px;
+                &:hover {
+                    background: $cooking-red !important;
+                    border-color: $cooking-red !important;
+                    svg path {
+                        fill: var(--white-color) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+.upcoming-course-lan {
+    .latest-courses-slider {
+        padding-bottom: 60px;
+        border-bottom: 1px solid $main-color-8;
+        .owl-nav {
+            background: $section-bg;
+        }
+    }
+}
+.direction-rtl {
+    .product-varity-cooking,
+    .upcoming-course-lan {
+        .latest-courses-slider {
+            .owl-nav {
+                left: -18px;
+                right: auto;
+            }
+        }
+    }
+}

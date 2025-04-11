@@ -1,0 +1,166 @@
+.product-varity {
+    padding: toRem(120) 0;
+    @media screen and (max-width: 991px) {
+        padding: toRem(80) 0;
+    }
+    @media screen and (max-width: 575px) {
+        padding: toRem(50) 0;
+    }
+    &-lan {
+        background-color: $purple;
+    }
+    &-content {
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: toRem(11);
+            padding-bottom: toRem(59);
+            @media screen and (max-width: 767px) {
+                padding-bottom: toRem(30);
+            }
+            .title {
+                @include fontFamilyAlt(41, $fw_medium, 1.065, $main-color);
+                @media screen and (max-width: 991px) {
+                    text-align: center;
+                    max-width: toRem(545);
+                    margin: 0 auto !important;
+                }
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                max-width: toRem(345);
+                @include fontFamilyAlt(16, $fw_regular, 1.54, $para-text);
+                text-align: center;
+            }
+        }
+    }
+    &-cooking {
+        .product-varity {
+            &-content {
+                .title-wrap {
+                    display: block;
+                    .title {
+                        color: $white !important;
+                        @media screen and (max-width: 991px) {
+                            text-align: left;
+                            margin-right: auto !important;
+                        }
+                    }
+                    .text {
+                        color: $white;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+    &-meditation {
+        position: relative;
+        background-color: $meditation-primary;
+        overflow: hidden;
+        &::before {
+            content: "";
+            position: absolute;
+            top: -29px;
+            left: -144px;
+            width: 402px;
+            height: 402px;
+            border-radius: 50%;
+            background-color: $meditation-red;
+            filter: blur(150px);
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -99px;
+            right: -209px;
+            width: 402px;
+            height: 402px;
+            border-radius: 50%;
+            background-color: $meditation-blue;
+            filter: blur(150px);
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
+        }
+        .product-varity {
+            &-content {
+                .title-wrap {
+                    display: block;
+                    .title {
+                        text-align: center;
+                        max-width: 100%;
+                        margin: 0 auto !important;
+                        color: $white !important;
+                        padding-bottom: 13px;
+                    }
+                    .text {
+                        color: $white;
+                        text-align: center;
+                        max-width: 100%;
+                        margin: 0 auto !important;
+                    }
+                }
+            }
+        }
+        .course-item-meditation
+            .course-item-two
+            .content
+            .price:has(.discountPrice)
+            .regularPrice {
+            color: $meditation-para-text !important;
+        }
+    }
+    &-kindergarten {
+        position: relative;
+        padding: toRem(280) 0 toRem(152);
+        background-color: $kindergarten-secondary-light;
+        @media screen and (max-width: 1450px) {
+            padding-top: toRem(200);
+        }
+        @media screen and (max-width: 1300px) {
+            padding-top: toRem(130);
+        }
+        @media screen and (max-width: 991px) {
+            padding: toRem(100) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        .wave-img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: auto;
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
+        }
+        .product-varity {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $kindergarten-primary;
+                    }
+                    .text {
+                        color: $kindergarten-para-text;
+                    }
+                }
+            }
+        }
+    }
+}

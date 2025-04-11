@@ -1,0 +1,95 @@
+.course-category {
+    padding: toRem(120) 0;
+    @media screen and (max-width: 991px) {
+        padding: toRem(80) 0;
+    }
+    @media screen and (max-width: 575px) {
+        padding: toRem(50) 0;
+    }
+    &-lan {
+        background-color: $purple;
+    }
+    &-content {
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: toRem(11);
+            padding-bottom: toRem(59);
+            @media screen and (max-width: 767px) {
+                padding-bottom: toRem(30);
+            }
+            .title {
+                @include fontFamilyAlt(41, $fw_medium, 1.065, $cooking-primary);
+                @media screen and (max-width: 991px) {
+                    text-align: center;
+                    max-width: toRem(545);
+                    margin: 0 auto !important;
+                }
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                @include fontFamilyAlt(
+                    16,
+                    $fw_regular,
+                    1.54,
+                    $cooking-para-text
+                );
+                text-align: center;
+            }
+        }
+    }
+    &-cooking {
+        .course-item {
+            &-four {
+                .content {
+                    > .title {
+                        color: $cooking-primary;
+                    }
+                    .author {
+                        color: $cooking-para-text;
+                    }
+                    .rating-wrap {
+                        .no {
+                            color: $cooking-primary;
+                        }
+                        .totalRating {
+                            color: $cooking-para-text;
+                        }
+                    }
+                    .price {
+                        color: $cooking-primary;
+                        .discountPrice {
+                            color: $cooking-red !important;
+                        }
+                        .regularPrice {
+                            color: $cooking-red !important;
+                        }
+                        &:has(.discountPrice) {
+                            .regularPrice {
+                                color: $cooking-disable !important;
+                                text-decoration: line-through;
+                            }
+                        }
+                    }
+                    .cashback {
+                        .title {
+                            color: $cooking-primary;
+                        }
+                        .amount {
+                            color: $cooking-red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

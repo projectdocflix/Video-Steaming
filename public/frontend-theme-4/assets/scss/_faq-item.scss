@@ -1,0 +1,266 @@
+/* Accordion */
+.zAccordion {
+    &-reset {
+        .accordion {
+            &-item {
+                border: none;
+                border-radius: 0;
+            }
+            &-body {
+                padding: 0;
+            }
+            &-button {
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                background-color: transparent !important;
+                padding: 0 !important;
+            }
+        }
+    }
+    &-one {
+        display: flex;
+        flex-direction: column;
+        row-gap: toRem(24);
+        .row {
+            div {
+                .accordion-item {
+                    margin-bottom: toRem(24);
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+        .accordion {
+            &-item {
+                border: none;
+                border-radius: toRem(2);
+                background-color: $faq-header;
+            }
+            &-collapse {
+                box-shadow: none;
+            }
+            &-body {
+                background-color: $white;
+                padding: toRem(22) toRem(30);
+                @include fontFamily(16, $fw_regular, 24, $para-text);
+                box-shadow: 0px 4px 7px 0px #1f10571f;
+                @media screen and (max-width: 767px) {
+                    padding: toRem(20) !important;
+                }
+                @media screen and (max-width: 575px) {
+                    padding: toRem(10) !important;
+                }
+            }
+            &-button {
+                padding: toRem(14) toRem(20) toRem(13) toRem(28) !important;
+                border-radius: toRem(2);
+                @include fontFamily(18, $fw_medium, 28, $main-color);
+                column-gap: toRem(4);
+                @media screen and (max-width: 767px) {
+                    padding: toRem(20) !important;
+                }
+                @media screen and (max-width: 575px) {
+                    padding: toRem(10) !important;
+                    font-size: toRem(16);
+                }
+                &.collapsed {
+                    &::after {
+                        background-image: url(../images/accordion-closed.svg);
+                    }
+                }
+                &::after {
+                    width: toRem(22);
+                    height: toRem(22);
+                    background-image: url(../images/accordion-open.svg);
+                    background-size: toRem(22);
+                    transform: rotate(0);
+                }
+            }
+        }
+    }
+    &-cooking {
+        .accordion {
+            &-item {
+                background-color: $faq-header;
+            }
+            &-body {
+                color: $cooking-para-text;
+                box-shadow: none;
+            }
+            &-button {
+                padding: toRem(14) toRem(20) toRem(13) toRem(28) !important;
+                color: $cooking-primary;
+                gap: toRem(20);
+                &.collapsed {
+                    &::after {
+                        background-image: url(../images/accordion-icon-cooking-closed.svg);
+                    }
+                }
+                &::after {
+                    background-image: url(../images/accordion-icon-cooking-open.svg);
+                }
+            }
+        }
+    }
+    &-meditation {
+        .accordion {
+            &-item {
+                background-color: $meditation-faq-header;
+            }
+            &-body {
+                color: $meditation-para-text;
+                box-shadow: none;
+            }
+            &-button {
+                padding: toRem(14) toRem(20) toRem(13) toRem(28) !important;
+                color: $meditation-primary;
+                &.collapsed {
+                    &::after {
+                        background-image: url(../images/accordion-icon-cooking-closed.svg);
+                    }
+                }
+                &::after {
+                    background-image: url(../images/accordion-icon-cooking-open.svg);
+                }
+            }
+        }
+    }
+    &-kindergarten {
+        .accordion {
+            &-item {
+                background-color: $kindergarten-coreFeatures;
+            }
+            &-body {
+                background-color: $kindergarten-secondary-light;
+                color: $kindergarten-para-text;
+                box-shadow: none;
+            }
+            &-button {
+                padding: toRem(14) toRem(20) toRem(13) toRem(28) !important;
+                color: $cooking-primary;
+                &.collapsed {
+                    &::after {
+                        background-image: url(../images/accordion-icon-cooking-closed.svg);
+                    }
+                }
+                &::after {
+                    background-image: url(../images/accordion-icon-cooking-open.svg);
+                }
+            }
+        }
+    }
+}
+
+.faq-section {
+    padding: 0 0 toRem(120);
+    @media screen and (max-width: 991px) {
+        padding: 0 0 toRem(80);
+    }
+    @media screen and (max-width: 575px) {
+        padding: 0 0 toRem(50);
+    }
+    &-content {
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: toRem(19);
+            padding-bottom: toRem(59);
+            @media screen and (max-width: 767px) {
+                padding-bottom: toRem(30);
+            }
+            .title {
+                @include fontFamilyAlt(41, $fw_medium, 1.065, $main-color);
+                text-align: center;
+                max-width: toRem(280);
+                margin: 0 auto !important;
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                @include fontFamilyAlt(16, $fw_regular, 1.54, $para-text);
+                text-align: center;
+            }
+        }
+    }
+    &-cooking {
+        .faq-section {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $cooking-primary;
+                    }
+                    .text {
+                        color: $cooking-para-text;
+                    }
+                }
+            }
+        }
+    }
+    &-meditation {
+        padding: toRem(120) 0;
+        @media screen and (max-width: 991px) {
+            padding: toRem(80) 0;
+        }
+        @media screen and (max-width: 575px) {
+            padding: toRem(50) 0;
+        }
+        .faq-section {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $meditation-primary;
+                    }
+                    .text {
+                        color: $meditation-para-text;
+                    }
+                }
+            }
+        }
+    }
+    &-kindergarten {
+        background-color: $white;
+        .faq-section {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $kindergarten-primary;
+                    }
+                    .text {
+                        color: $kindergarten-para-text;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Client Logo */
+.client-logo {
+    &-wrap {
+        padding-top: toRem(81);
+        max-width: toRem(1100);
+        margin: 0 auto;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: toRem(20);
+    @media screen and (max-width: 767px) {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    li {
+        display: flex;
+        flex: 1 1 auto;
+        max-width: toRem(119);
+    }
+}

@@ -1,0 +1,128 @@
+.board-section {
+    padding: toRem(120) 0;
+    @media screen and (max-width: 991px) {
+        padding: toRem(80) 0;
+    }
+    @media screen and (max-width: 575px) {
+        padding: toRem(50) 0;
+    }
+    &-content {
+        .title-wrap {
+            padding-bottom: toRem(48);
+            .title {
+                @include fontFamilyAlt(41, $fw_medium, 1.065, $main-color);
+                padding-bottom: toRem(11);
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                @include fontFamily(14, $fw_regular, 21.56, $para-text);
+            }
+        }
+    }
+    &-cooking {
+        .board-section {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $cooking-primary;
+                    }
+                    .text {
+                        color: $cooking-para-text;
+                    }
+                }
+            }
+        }
+    }
+    &-meditation {
+        .board-section {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $white;
+                    }
+                    .text {
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+    &-kindergarten {
+        padding-top: 0;
+        .board-section {
+            &-content {
+                .title-wrap {
+                    .title {
+                        color: $kindergarten-primary;
+                    }
+                    .text {
+                        color: $kindergarten-para-text;
+                    }
+                }
+            }
+        }
+        .course-item-one {
+            background-color: $kindergarten-coreFeatures;
+            > .title {
+                color: $kindergarten-primary;
+            }
+            .author {
+                color: $kindergarten-para-text;
+            }
+            .rating-wrap {
+                .no {
+                    color: $kindergarten-primary;
+                }
+                .totalRating {
+                    color: $kindergarten-para-text;
+                }
+            }
+            .price {
+                color: $kindergarten-primary;
+                span {
+                    color: $kindergarten-secondary !important;
+                }
+            }
+            .cashback {
+                background-color: $white;
+                .title {
+                    color: $kindergarten-primary;
+                }
+                .amount {
+                    color: $kindergarten-secondary;
+                }
+            }
+        }
+        .latest-courses-slider {
+            position: relative;
+            padding-bottom: 55px;
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 15px;
+                width: 100%;
+                max-width: calc(100% - 116px);
+                height: 1px;
+                background-color: $main-color-8;
+            }
+            .owl-nav {
+                background: $white;
+                button {
+                    margin: 0 4px;
+                    &:hover {
+                        background: $kindergarten-secondary !important;
+                    }
+                }
+            }
+        }
+    }
+}

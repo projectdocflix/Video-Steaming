@@ -1,0 +1,16 @@
+@function toRem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
+@mixin fontFamily($fontSize, $fontWeight, $lineHeight, $textColor) {
+  font-size: toRem($fontSize);
+  font-weight: $fontWeight;
+  line-height: toRem($lineHeight);
+  color: $textColor;
+}
+@mixin fontFamilyAlt($fontSize, $fontWeight, $lineHeight, $textColor) {
+  font-size: toRem($fontSize);
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  color: $textColor;
+}

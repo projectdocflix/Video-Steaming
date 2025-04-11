@@ -1,0 +1,168 @@
+.btn {
+  &-outline {
+    &-lan {
+      padding: toRem(11) toRem(15);
+      background-color: transparent;
+      border: toRem(2) solid $purple;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $purple);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $purple;
+        color: $white !important;
+      }
+    }
+    &-cooking {
+      padding: toRem(11) toRem(15);
+      background-color: transparent;
+      border: toRem(2) solid $cooking-red;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $cooking-red);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $cooking-red;
+        color: $white !important;
+      }
+    }
+    &-meditation {
+      padding: toRem(11) toRem(15);
+      background-color: transparent;
+      border: toRem(2) solid $meditation-primary;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $meditation-primary);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $meditation-primary;
+        color: $white !important;
+      }
+    }
+    &-meditation-white {
+      padding: toRem(11) toRem(15);
+      background-color: transparent;
+      border: toRem(2) solid $white;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $white);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $white;
+        color: $meditation-primary !important;
+      }
+    }
+    &-kindergarten {
+      padding: toRem(11) toRem(15);
+      background-color: transparent;
+      border: toRem(2) solid $kindergarten-secondary;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $kindergarten-secondary);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $kindergarten-secondary;
+        color: $white !important;
+      }
+    }
+  }
+  &-fill {
+    &-lan {
+      padding: toRem(11) toRem(15);
+      background-color: $purple;
+      border: toRem(2) solid $purple;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $white);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $white;
+        color: $purple !important;
+      }
+    }
+    &-alt {
+      &-lan {
+        padding: toRem(11) toRem(15);
+        background-color: $red;
+        border: toRem(2) solid $red;
+        border-radius: toRem(4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: toRem(7);
+        @include fontFamily(15, $fw_semiBold, 23, $white);
+        transition: all 0.3s;
+        &:hover {
+          background-color: $white;
+          color: $red !important;
+        }
+      }
+    }
+    &-cooking {
+      padding: toRem(11) toRem(15);
+      background-color: $cooking-red;
+      border: toRem(2) solid $cooking-red;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $white);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $white;
+        color: $cooking-red !important;
+      }
+    }
+    &-meditation {
+      padding: toRem(11) toRem(15);
+      background-color: $meditation-primary;
+      border: toRem(2) solid $meditation-primary;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $white);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $white;
+        color: $meditation-primary !important;
+      }
+    }
+    &-kindergarten {
+      padding: toRem(11) toRem(15);
+      background-color: $kindergarten-yellow;
+      border: toRem(2) solid $kindergarten-yellow;
+      border-radius: toRem(4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: toRem(7);
+      @include fontFamily(15, $fw_semiBold, 23, $white);
+      transition: all 0.3s;
+      &:hover {
+        background-color: $white;
+        color: $kindergarten-yellow !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,236 @@
+.top-instructor {
+    padding: toRem(120) 0;
+    @media screen and (max-width: 991px) {
+        padding: toRem(80) 0;
+    }
+    @media screen and (max-width: 575px) {
+        padding: toRem(50) 0;
+    }
+    &-content {
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: toRem(11);
+            padding-bottom: toRem(54);
+            @media screen and (max-width: 767px) {
+                padding-bottom: toRem(30);
+            }
+            .title {
+                max-width: toRem(450);
+                margin: 0 auto;
+                @include fontFamilyAlt(41, $fw_medium, 1.065, $main-color);
+                text-align: center;
+                @media screen and (max-width: 991px) {
+                    font-size: toRem(36);
+                }
+                @media screen and (max-width: 767px) {
+                    font-size: toRem(34);
+                }
+                @media screen and (max-width: 575px) {
+                    font-size: toRem(30);
+                }
+            }
+            .text {
+                max-width: toRem(345);
+                @include fontFamilyAlt(16, $fw_regular, 1.54, $para-text);
+                text-align: center;
+            }
+        }
+    }
+    &-cooking {
+        .course-rating {
+            margin-bottom: 15px;
+        }
+        .trainer-name {
+            font-size: 19px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 106.5%;
+            margin-bottom: 11px !important;
+            color: $white;
+        }
+        .trainer-name a {
+            color: $white;
+        }
+        .trainer-position {
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 106.5%;
+            margin-bottom: 16px !important;
+            color: $white;
+        }
+        .trainer-base img {
+            width: 30px;
+            height: 30px;
+            margin-right: 3px;
+        }
+        .trainer-base {
+            margin-bottom: 17px;
+        }
+        .hover-trainer-info {
+            padding: 30px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .training-card {
+            min-height: 428px;
+            max-height: 428px;
+        }
+        .trainer-img {
+            height: 428px;
+            width: 100%;
+        }
+        .training-card:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: rgb(12, 12, 13);
+            background: linear-gradient(
+                180deg,
+                rgba(12, 12, 13, 0) 0%,
+                rgba(3, 3, 3, 0.85) 72%,
+                rgba(0, 0, 0, 1) 100%
+            );
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .training-card:hover:after {
+            opacity: 1;
+        }
+        .training-card:hover .hover-trainer-info {
+            opacity: 1;
+        }
+        .theme-button1 {
+            color: $white !important;
+            background-color: $cooking-red;
+            border: 2px solid $cooking-red;
+        }
+    }
+    &-kindergarten {
+        position: relative;
+        padding-bottom: 0;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            max-height: toRem(474);
+            background-color: $kindergarten-secondary;
+        }
+        .bg-img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            max-height: toRem(474);
+            @media screen and (max-width: 767px) {
+                max-height: toRem(274);
+            }
+        }
+        .top-instructor {
+            &-content {
+                position: relative;
+                .title {
+                    color: $white;
+                }
+                .text {
+                    color: $white;
+                }
+            }
+        }
+    }
+    &-item {
+        &-one {
+            height: 100%;
+            padding: toRem(20);
+            background-color: $kindergarten-coreFeatures;
+            .img {
+                display: flex;
+                max-height: toRem(260);
+                min-height: toRem(260);
+                overflow: hidden;
+                border-radius: toRem(10);
+                img {
+                    width: 100%;
+                }
+            }
+            .content {
+                padding-top: toRem(25);
+                .title {
+                    display: block;
+                    @include fontFamily(
+                        19,
+                        $fw_medium,
+                        20,
+                        $kindergarten-primary
+                    );
+                    padding-bottom: toRem(11);
+                }
+                .ins-authLevel {
+                    @include fontFamily(
+                        12,
+                        $fw_medium,
+                        12,
+                        $kindergarten-para-text
+                    );
+                    padding-bottom: toRem(16);
+                }
+                .ratingWrap {
+                    display: flex;
+                    align-items: center;
+                    gap: toRem(9);
+                    padding-bottom: toRem(17);
+                    .no {
+                        @include fontFamily(
+                            14,
+                            $fw_medium,
+                            15,
+                            $kindergarten-primary
+                        );
+                    }
+                    .totalRating {
+                        @include fontFamily(
+                            14,
+                            $fw_regular,
+                            15,
+                            $kindergarten-para-text
+                        );
+                    }
+                }
+                .awardList {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: toRem(7);
+                    padding-bottom: toRem(17);
+                    img {
+                        width: toRem(30);
+                        height: toRem(30);
+                    }
+                }
+                .linkBtn {
+                    max-width: toRem(159);
+                }
+            }
+            .instructor-price-cutoff.badge {
+                top: 40px;
+                right: 40px;
+            }
+        }
+    }
+}
