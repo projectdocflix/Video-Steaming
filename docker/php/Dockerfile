@@ -63,8 +63,15 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction
 USER root
 
 # Adjust permissions for Laravel
-RUN chown -R www:www /var/www/html/storage /var/www/html/bootstrap/cache && \
-    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN mkdir -p /var/www/html/storage/framework/sessions \
+             /var/www/html/storage/framework/views \
+             /var/www/html/storage/framework/cache \
+             /var/www/html/storage/logs \
+             /var/www/html/bootstrap/cache \
+             /var/www/html/resources \
+             /var/www/html/public && \
+    chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/resources /var/www/html/public && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/resources /var/www/html/public
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
