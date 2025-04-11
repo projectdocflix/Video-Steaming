@@ -63,7 +63,7 @@ jobs:
 
       # Copy the docker-compose.yml file to the EC2 instance
       - name: Copy docker-compose.yml via SCP
-        uses: easingthemes/ssh-deploy@v5.2.0 # Using a specific version
+        uses: easingthemes/ssh-deploy@v5.1.0 # Using a specific version
         with:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.EC2_SSH_HOST }}
