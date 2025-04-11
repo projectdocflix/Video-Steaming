@@ -45,8 +45,7 @@ services:
     container_name: laravel_db
     restart: unless-stopped
     ports:
-      # Expose MySQL port only if you need direct access from your host machine (often not needed)
-      # - "3307:3306" # Map host port 3307 to container port 3306
+      - "3307:3306" # Map host port 3307 to container port 3306
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
