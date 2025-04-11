@@ -23,8 +23,8 @@ services:
     ports:
       - "80:80" # Map host port 80 to container port 80
       # Add - "443:443" if you configure SSL within the container/Nginx config
-    volumes:
-      - .:/var/www/html # Mount code so Nginx can access the public dir
+    # volumes:
+    #   - .:/var/www/html # Mount code so Nginx can access the public dir
       # If using SSL certificates:
       # - ./docker/nginx/certs:/etc/nginx/certs:ro
     networks:

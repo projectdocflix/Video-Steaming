@@ -86,29 +86,121 @@ jobs:
             # docker-compose.yml should have been copied by the previous step
 
             # Create the production .env file from GitHub Secrets
+            # Create the production .env file from GitHub Secrets or hardcoded values
             echo "--- Creating .env file on EC2 ---"
-            echo "APP_NAME=Laravel" > .env # Or use a secret: ${{ secrets.APP_NAME }}
+            echo "APP_NAME=LMSzai" > .env
             echo "APP_ENV=production" >> .env
             echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
             echo "APP_DEBUG=false" >> .env
-            echo "APP_URL=http://${{ secrets.EC2_SSH_HOST }}" >> .env # Replace with your domain if applicable
+            echo "APP_URL=http://${{ secrets.EC2_SSH_HOST }}" >> .env
 
             echo "LOG_CHANNEL=stack" >> .env
-            echo "LOG_LEVEL=error" >> .env # Recommended for production
+            echo "LOG_DEPRECATIONS_CHANNEL=null" >> .env
+            echo "LOG_LEVEL=debug" >> .env
 
             echo "DB_CONNECTION=mysql" >> .env
-            echo "DB_HOST=db" >> .env # IMPORTANT: Use the Docker Compose service name for the DB host
+            echo "DB_HOST=db" >> .env
             echo "DB_PORT=3306" >> .env
             echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
             echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
             echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+            echo "DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}" >> .env
 
-            # Add ALL other necessary production environment variables from secrets
-            # Example: echo "PUSHER_APP_KEY=${{ secrets.PUSHER_APP_KEY }}" >> .env
-            # Example: echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
-            # --- Add all other variables your app needs ---
-            echo "MIX_PUSHER_APP_KEY=\${PUSHER_APP_KEY}" >> .env # Ensure MIX vars are present if needed by frontend JS
+            echo "BROADCAST_DRIVER=pusher" >> .env
+            echo "CACHE_DRIVER=file" >> .env
+            echo "FILESYSTEM_DISK=local" >> .env
+            echo "QUEUE_CONNECTION=sync" >> .env
+            echo "SESSION_DRIVER=file" >> .env
+            echo "SESSION_LIFETIME=120" >> .env
+
+            echo "MEMCACHED_HOST=127.0.0.1" >> .env
+
+            echo "REDIS_HOST=127.0.0.1" >> .env
+            echo "REDIS_PASSWORD=null" >> .env
+            echo "REDIS_PORT=6379" >> .env
+
+            echo "MAIL_MAILER=smtp" >> .env
+            echo "MAIL_HOST=mailhog" >> .env
+            echo "MAIL_PORT=1025" >> .env
+            echo "MAIL_USERNAME=null" >> .env
+            echo "MAIL_PASSWORD=null" >> .env
+            echo "MAIL_ENCRYPTION=null" >> .env
+            echo "MAIL_FROM_ADDRESS=hello@example.com" >> .env
+            echo "MAIL_FROM_NAME=\${APP_NAME}" >> .env
+
+            echo "STORAGE_DRIVER=public" >> .env
+
+            echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
+            echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+            echo "AWS_DEFAULT_REGION=" >> .env
+            echo "AWS_BUCKET=" >> .env
+            echo "AWS_USE_PATH_STYLE_ENDPOINT=false" >> .env
+
+            echo "PUSHER_APP_ID=" >> .env
+            echo "PUSHER_APP_KEY=" >> .env
+            echo "PUSHER_APP_SECRET=" >> .env
+            echo "PUSHER_APP_CLUSTER=ap1" >> .env
+
+            echo "ZOOM_API_URL=https://api.zoom.us/v2/" >> .env
+
+            echo "BBB_SECURITY_SALT=" >> .env
+            echo "BBB_SERVER_BASE_URL=" >> .env
+
+            echo "MIX_PUSHER_APP_KEY=\${PUSHER_APP_KEY}" >> .env
             echo "MIX_PUSHER_APP_CLUSTER=\${PUSHER_APP_CLUSTER}" >> .env
+
+            echo "GOOGLE_LOGIN_STATUS=1" >> .env
+            echo "GOOGLE_CLIENT_ID=" >> .env
+            echo "GOOGLE_CLIENT_SECRET=" >> .env
+            echo "GOOGLE_REDIRECT_URL=" >> .env
+
+            echo "FACEBOOK_LOGIN_STATUS=1" >> .env
+            echo "FACEBOOK_CLIENT_ID=" >> .env
+            echo "FACEBOOK_CLIENT_SECRET=" >> .env
+            echo "FACEBOOK_REDIRECT_URL=" >> .env
+
+            echo "TWITTER_LOGIN_STATUS=1" >> .env
+            echo "TWITTER_CLIENT_ID=" >> .env
+            echo "TWITTER_CLIENT_SECRET=" >> .env
+            echo "TWITTER_REDIRECT_URL=" >> .env
+
+            echo "COOKIE_CONSENT_STATUS=true" >> .env
+
+            echo "VIMEO_CLIENT=" >> .env
+            echo "VIMEO_SECRET=" >> .env
+            echo "VIMEO_TOKEN_ACCESS=" >> .env
+            echo "VIMEO_STATUS=deactivated" >> .env
+
+            echo "PAYPAL_CLIENT_ID=" >> .env
+            echo "PAYPAL_SECRET=" >> .env
+            echo "PAYPAL_MODE=sandbox" >> .env
+
+            echo "RAZORPAY_KEY=" >> .env
+            echo "RAZORPAY_SECRET=" >> .env
+
+            echo "SSLCZ_STORE_ID=" >> .env
+            echo "SSLCZ_STORE_PASSWD=" >> .env
+
+            echo "MOLLIE_KEY=" >> .env
+
+            echo "IM_API_KEY=" >> .env
+            echo "IM_AUTH_TOKEN=" >> .env
+            echo "IM_URL=" >> .env
+
+            echo "PAYSTACK_PUBLIC_KEY=" >> .env
+            echo "PAYSTACK_SECRET_KEY=" >> .env
+            echo "PAYSTACK_PAYMENT_URL=https://api.paystack.co" >> .env
+            echo "MERCHANT_EMAIL=youremail@gmail.com" >> .env
+
+            echo "MERCADO_PAGO_CLIENT_ID=" >> .env
+            echo "MERCADO_PAGO_CLIENT_SECRET=" >> .env
+
+            echo "FLW_PUBLIC_KEY=" >> .env
+            echo "FLW_SECRET_KEY=" >> .env
+            echo "FLW_SECRET_HASH=" >> .env
+
+            echo "APP_DEMO=0" >> .env
+
 
             echo "--- Pulling latest Docker images from Docker Hub ---"
             docker-compose pull
