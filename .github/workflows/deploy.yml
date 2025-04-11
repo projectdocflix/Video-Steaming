@@ -1,112 +1,72 @@
-name: Deploy Laravel App to EC2
+deploy:
+  name: Deploy to EC2 Instance
+  needs: build-and-push # Run only after build-and-push is successful
+  runs-on: ubuntu-latest
 
-on:
-  push:
-    branches:
-      - main # Trigger deployment on push to the main branch
+  steps:
+    - name: Checkout code # Needed to get docker-compose.yml
+      uses: actions/checkout@v4
 
-jobs:
-  build-and-push:
-    name: Build & Push Docker Images
-    runs-on: ubuntu-latest
+    - name: Copy docker-compose.yml via SCP # <<< NEW STEP
+      uses: easingthemes/ssh-deploy@v5.2.0 # Or use a specific version like v5.0.0
+      with:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        REMOTE_HOST: ${{ secrets.EC2_SSH_HOST }}
+        REMOTE_USER: ${{ secrets.EC2_SSH_USER }}
+        SOURCE: "docker-compose.yml" # Source file in the repo workspace
+        TARGET: "~/my-laravel-app"   # Target directory on EC2
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Execute deployment commands via SSH # <<< MODIFIED STEP
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_SSH_HOST }}
+        username: ${{ secrets.EC2_SSH_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
+        script: |
+          # Navigate to the deployment directory
+          cd ~/my-laravel-app || exit 1
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+          # docker-compose.yml should already be here now via the previous step
+          # REMOVED: cp ${{ github.workspace }}/docker-compose.yml . 
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          # Create the production .env file from secrets
+          echo "--- Creating .env file on EC2 ---"
+          echo "APP_NAME=Laravel" > .env
+          echo "APP_ENV=production" >> .env
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+          echo "APP_DEBUG=false" >> .env
+          echo "APP_URL=http://${{ secrets.EC2_SSH_HOST }}" >> .env # Use your actual domain if you have one
 
-      - name: Build and push PHP App image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./docker/php/Dockerfile # Path to your PHP Dockerfile
-          push: true
-          tags: projectdocflix/mediflix:latest # !!! CHANGE THIS !!!
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          echo "LOG_CHANNEL=stack" >> .env
+          echo "LOG_LEVEL=error" >> .env
 
-      - name: Build and push Nginx image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./docker/nginx/Dockerfile # Path to your Nginx Dockerfile
-          push: true
-          tags: projectdocflix/mediflix:latest # !!! CHANGE THIS !!!
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=db" >> .env # Docker Compose service name
+          echo "DB_PORT=3306" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
 
-  deploy:
-    name: Deploy to EC2 Instance
-    needs: build-and-push # Run only after build-and-push is successful
-    runs-on: ubuntu-latest
+          # --- Add all other variables your app needs ---
 
-    steps:
-      - name: Checkout code # Needed to get docker-compose.yml
-        uses: actions/checkout@v4
+          echo "--- Pulling latest images ---"
+          docker-compose pull
 
-      - name: Deploy to EC2 via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_SSH_HOST }}
-          username: ${{ secrets.EC2_SSH_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22 # Default SSH port
-          script: |
-            # Navigate to the deployment directory
-            cd ~/my-laravel-app || exit 1
+          echo "--- Stopping any old containers ---"
+          docker-compose down --remove-orphans
 
-            # Copy the docker-compose file from the repo workspace to EC2
-            # Uses scp functionality inherent in the ssh-action
-            # Ensure the source path matches your repo structure
-            cp ${{ github.workspace }}/docker-compose.yml .
+          echo "--- Starting new containers ---"
+          docker-compose up -d
 
-            # Create the production .env file from secrets
-            echo "--- Creating .env file on EC2 ---"
-            echo "APP_NAME=Laravel" > .env
-            echo "APP_ENV=production" >> .env
-            echo "APP_KEY=${{ secrets.PROD_APP_KEY }}" >> .env
-            echo "APP_DEBUG=false" >> .env
-            echo "APP_URL=http://${{ secrets.EC2_SSH_HOST }}" >> .env # Use your actual domain if you have one
+          echo "--- Running database migrations ---"
+          # Use -T to avoid issues with TTY allocation in non-interactive shells
+          docker-compose exec -T app php artisan migrate --force || echo "Migration failed or no migrations to run."
 
-            echo "LOG_CHANNEL=stack" >> .env
-            echo "LOG_LEVEL=error" >> .env
+          echo "--- Optimizing Laravel ---"
+          docker-compose exec -T app php artisan optimize:clear
+          docker-compose exec -T app php artisan config:cache
+          docker-compose exec -T app php artisan route:cache
+          docker-compose exec -T app php artisan view:cache
 
-            echo "DB_CONNECTION=mysql" >> .env
-            echo "DB_HOST=db" >> .env # Docker Compose service name
-            echo "DB_PORT=3306" >> .env
-            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-
-            # Add other necessary production env vars using secrets
-            # echo "PUSHER_APP_KEY=${{ secrets.PROD_PUSHER_APP_KEY }}" >> .env
-            # --- Add all other variables your app needs ---
-
-            echo "--- Pulling latest images ---"
-            docker-compose pull
-
-            echo "--- Stopping any old containers ---"
-            docker-compose down --remove-orphans
-
-            echo "--- Starting new containers ---"
-            docker-compose up -d
-
-            echo "--- Running database migrations ---"
-            # Use -T to avoid issues with TTY allocation in non-interactive shells
-            docker-compose exec -T app php artisan migrate --force || echo "Migration failed or no migrations to run."
-
-            echo "--- Optimizing Laravel ---"
-            docker-compose exec -T app php artisan optimize:clear
-            docker-compose exec -T app php artisan config:cache
-            docker-compose exec -T app php artisan route:cache
-            docker-compose exec -T app php artisan view:cache
-
-            echo "--- Deployment finished successfully! ---"
+          echo "--- Deployment finished successfully! ---"
