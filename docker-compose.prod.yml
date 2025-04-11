@@ -43,7 +43,7 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password_change_me} # Provide a root password
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} # Provide a root password
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
