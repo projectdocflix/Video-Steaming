@@ -81,6 +81,7 @@ jobs:
           port: 22 # Default SSH port
           script: |
             # Navigate to the deployment directory (which must exist)
+            mkdir -p ~/my-laravel-app
             cd ~/my-laravel-app || exit 1
 
             # docker-compose.yml should have been copied by the previous step
@@ -213,6 +214,24 @@ jobs:
             # Wait a few seconds for containers (especially DB) to initialize
             echo "--- Waiting for containers to start... ---"
             sleep 15
+
+            echo "--- Granting DB privileges ---"
+            # Extract needed variables from the .env file on the host
+            # Use '|| :' to prevent errors if grep finds nothing (e.g., empty password)
+            DB_DATABASE=$(grep '^DB_DATABASE=' .env | cut -d '=' -f2) || :
+            DB_USERNAME=$(grep '^DB_USERNAME=' .env | cut -d '=' -f2) || :
+            DB_PASSWORD=$(grep '^DB_PASSWORD=' .env | cut -d '=' -f2-) || : # Use f2- to capture rest of line for password
+            DB_ROOT_PASSWORD=$(grep '^DB_ROOT_PASSWORD=' .env | cut -d '=' -f2-) || : # Use f2- to capture rest of line for password
+
+            # Construct the MySQL commands using NOWDOC to handle quotes/special chars
+            MYSQL_COMMAND=$(cat <<-SQL
+            CREATE USER IF NOT EXISTS '${DB_USERNAME}'@'%' IDENTIFIED BY '${DB_PASSWORD}';
+            GRANT ALL PRIVILEGES ON \`${DB_DATABASE}\`.* TO '${DB_USERNAME}'@'%';
+            FLUSH PRIVILEGES;
+            SQL
+            )
+            # Execute the command inside the db container
+            docker-compose exec -T db mysql -u root -p"${DB_ROOT_PASSWORD}" -e "$MYSQL_COMMAND" || echo "DB Grant/Create User failed (INFO: Might be okay if user already exists with correct grants)"
 
             echo "--- Running database migrations ---"
             # Use -T to avoid TTY allocation issues in non-interactive shells

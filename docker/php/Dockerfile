@@ -30,7 +30,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions based on composer.json requirements
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip opcache
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath zip opcache mysqli 
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -41,6 +41,12 @@ RUN groupadd -g 1000 www && \
 
 # Copy existing application directory contents
 COPY . /var/www/html
+
+# After copying code:
+# Set ownership to www-data (adjust user/group if different in your base image)
+# Set permissions (775 allows user/group write, 755 allows only user write)
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public /var/www/html/resources && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public /var/www/html/resources
 
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www/html
