@@ -86,7 +86,6 @@ jobs:
             # docker-compose.yml should have been copied by the previous step
 
             # Create the production .env file from GitHub Secrets
-            # Create the production .env file from GitHub Secrets or hardcoded values
             echo "--- Creating .env file on EC2 ---"
             echo "APP_NAME=MediFlix" > .env
             echo "APP_ENV=production" >> .env

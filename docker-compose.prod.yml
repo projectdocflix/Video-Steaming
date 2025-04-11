@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     volumes: # <<< ADD THIS SECTION
-      - ./.env:/var/www/html/.env:ro # <<< ADD THIS LINE (maps host ./env to container /var/www/html/.env read-only)
+      - ./.env:/var/www/html/.env # <<< ADD THIS LINE (maps host ./env to container /var/www/html/.env read-only)
     networks:
       - laravelnet
     depends_on:
@@ -39,7 +39,7 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password_change_me}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
