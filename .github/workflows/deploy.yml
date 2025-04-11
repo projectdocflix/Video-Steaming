@@ -1,25 +1,112 @@
-name: Deploy Laravel App (Docker Compose)
+name: Deploy Laravel App to EC2
 
 on:
   push:
     branches:
-      - main
+      - main # Trigger deployment on push to the main branch
 
 jobs:
-  deploy:
+  build-and-push:
+    name: Build & Push Docker Images
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.8.1
-      with:
-        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Deploy to EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /home/ubuntu/laravel-app
-          git pull origin main
-          docker-compose down
-          docker-compose up -d --build
-EOF
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push PHP App image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/php/Dockerfile # Path to your PHP Dockerfile
+          push: true
+          tags: projectdocflix/mediflix:latest # !!! CHANGE THIS !!!
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push Nginx image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/nginx/Dockerfile # Path to your Nginx Dockerfile
+          push: true
+          tags: projectdocflix/mediflix:latest # !!! CHANGE THIS !!!
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy to EC2 Instance
+    needs: build-and-push # Run only after build-and-push is successful
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code # Needed to get docker-compose.yml
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_SSH_HOST }}
+          username: ${{ secrets.EC2_SSH_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22 # Default SSH port
+          script: |
+            # Navigate to the deployment directory
+            cd ~/my-laravel-app || exit 1
+
+            # Copy the docker-compose file from the repo workspace to EC2
+            # Uses scp functionality inherent in the ssh-action
+            # Ensure the source path matches your repo structure
+            cp ${{ github.workspace }}/docker-compose.yml .
+
+            # Create the production .env file from secrets
+            echo "--- Creating .env file on EC2 ---"
+            echo "APP_NAME=Laravel" > .env
+            echo "APP_ENV=production" >> .env
+            echo "APP_KEY=${{ secrets.PROD_APP_KEY }}" >> .env
+            echo "APP_DEBUG=false" >> .env
+            echo "APP_URL=http://${{ secrets.EC2_SSH_HOST }}" >> .env # Use your actual domain if you have one
+
+            echo "LOG_CHANNEL=stack" >> .env
+            echo "LOG_LEVEL=error" >> .env
+
+            echo "DB_CONNECTION=mysql" >> .env
+            echo "DB_HOST=db" >> .env # Docker Compose service name
+            echo "DB_PORT=3306" >> .env
+            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+
+            # Add other necessary production env vars using secrets
+            # echo "PUSHER_APP_KEY=${{ secrets.PROD_PUSHER_APP_KEY }}" >> .env
+            # --- Add all other variables your app needs ---
+
+            echo "--- Pulling latest images ---"
+            docker-compose pull
+
+            echo "--- Stopping any old containers ---"
+            docker-compose down --remove-orphans
+
+            echo "--- Starting new containers ---"
+            docker-compose up -d
+
+            echo "--- Running database migrations ---"
+            # Use -T to avoid issues with TTY allocation in non-interactive shells
+            docker-compose exec -T app php artisan migrate --force || echo "Migration failed or no migrations to run."
+
+            echo "--- Optimizing Laravel ---"
+            docker-compose exec -T app php artisan optimize:clear
+            docker-compose exec -T app php artisan config:cache
+            docker-compose exec -T app php artisan route:cache
+            docker-compose exec -T app php artisan view:cache
+
+            echo "--- Deployment finished successfully! ---"
