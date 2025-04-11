@@ -52,7 +52,7 @@
                                                     {{ $following->name }}
                                                 @endif
                                             </td>
-                                            <td>{{ date('Y-m-d'), strtotime($following->created_at) }}</td>
+                                            <td>{{ date('Y-m-d', strtotime($following->created_at)) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

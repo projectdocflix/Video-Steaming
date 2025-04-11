@@ -15,7 +15,7 @@ class CinetPayService
     private $successUrl;
     private $cancelUrl;
 
-    private $currency;
+    // private $currency;
 
     public function __construct($object)
     {
