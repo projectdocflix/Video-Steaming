@@ -1,72 +1,140 @@
-deploy:
-  name: Deploy to EC2 Instance
-  needs: build-and-push # Run only after build-and-push is successful
-  runs-on: ubuntu-latest
+# .github/workflows/deploy.yml
 
-  steps:
-    - name: Checkout code # Needed to get docker-compose.yml
-      uses: actions/checkout@v4
+name: Deploy Laravel App to EC2
 
-    - name: Copy docker-compose.yml via SCP # <<< NEW STEP
-      uses: easingthemes/ssh-deploy@v5.2.0 # Or use a specific version like v5.0.0
-      with:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-        REMOTE_HOST: ${{ secrets.EC2_SSH_HOST }}
-        REMOTE_USER: ${{ secrets.EC2_SSH_USER }}
-        SOURCE: "docker-compose.yml" # Source file in the repo workspace
-        TARGET: "~/my-laravel-app"   # Target directory on EC2
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - main # Trigger deployment ONLY on push to the main branch
 
-    - name: Execute deployment commands via SSH # <<< MODIFIED STEP
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.EC2_SSH_HOST }}
-        username: ${{ secrets.EC2_SSH_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        port: 22
-        script: |
-          # Navigate to the deployment directory
-          cd ~/my-laravel-app || exit 1
+jobs:
+  build-and-push:
+    name: Build & Push Docker Images
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
-          # docker-compose.yml should already be here now via the previous step
-          # REMOVED: cp ${{ github.workspace }}/docker-compose.yml . 
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-          # Create the production .env file from secrets
-          echo "--- Creating .env file on EC2 ---"
-          echo "APP_NAME=Laravel" > .env
-          echo "APP_ENV=production" >> .env
-          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
-          echo "APP_DEBUG=false" >> .env
-          echo "APP_URL=http://${{ secrets.EC2_SSH_HOST }}" >> .env # Use your actual domain if you have one
+      # Set up Docker Buildx for multi-platform builds (optional but good practice)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-          echo "LOG_CHANNEL=stack" >> .env
-          echo "LOG_LEVEL=error" >> .env
+      # Log in to Docker Hub using secrets
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-          echo "DB_CONNECTION=mysql" >> .env
-          echo "DB_HOST=db" >> .env # Docker Compose service name
-          echo "DB_PORT=3306" >> .env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+      # Build and push the PHP application image
+      - name: Build and push PHP App image
+        uses: docker/build-push-action@v5
+        with:
+          context: . # Use the root of the repo as the build context
+          file: ./docker/php/Dockerfile # Path to your PHP Dockerfile
+          push: true # Push the image to the registry
+          tags: projectdocflix/mediflix:latest
+          cache-from: type=gha # Use GitHub Actions cache for faster builds
+          cache-to: type=gha,mode=max
 
-          # --- Add all other variables your app needs ---
+      # Build and push the Nginx web server image
+      - name: Build and push Nginx image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/nginx/Dockerfile # Path to your Nginx Dockerfile
+          push: true
+          tags: projectdocflix/mediflix:latest 
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
-          echo "--- Pulling latest images ---"
-          docker-compose pull
+  deploy:
+    name: Deploy to EC2 Instance
+    needs: build-and-push # Run this job only after build-and-push is successful
+    runs-on: ubuntu-latest
 
-          echo "--- Stopping any old containers ---"
-          docker-compose down --remove-orphans
+    steps:
+      # Checks out the repository code again, primarily to get the docker-compose.yml file
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-          echo "--- Starting new containers ---"
-          docker-compose up -d
+      # Copy the docker-compose.yml file to the EC2 instance
+      - name: Copy docker-compose.yml via SCP
+        uses: easingthemes/ssh-deploy@v5.2.0 # Using a specific version
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.EC2_SSH_HOST }}
+          REMOTE_USER: ${{ secrets.EC2_SSH_USER }}
+          SOURCE: "docker-compose.yml" # Source file from the repository root
+          TARGET: "~/my-laravel-app"   # Target directory on EC2 (ensure this exists!)
 
-          echo "--- Running database migrations ---"
-          # Use -T to avoid issues with TTY allocation in non-interactive shells
-          docker-compose exec -T app php artisan migrate --force || echo "Migration failed or no migrations to run."
+      # Connect to EC2 and execute deployment commands
+      - name: Execute deployment commands via SSH
+        uses: appleboy/ssh-action@v1.0.3 # Using a specific version
+        with:
+          host: ${{ secrets.EC2_SSH_HOST }}
+          username: ${{ secrets.EC2_SSH_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22 # Default SSH port
+          script: |
+            # Navigate to the deployment directory (which must exist)
+            cd ~/my-laravel-app || exit 1
 
-          echo "--- Optimizing Laravel ---"
-          docker-compose exec -T app php artisan optimize:clear
-          docker-compose exec -T app php artisan config:cache
-          docker-compose exec -T app php artisan route:cache
-          docker-compose exec -T app php artisan view:cache
+            # docker-compose.yml should have been copied by the previous step
 
-          echo "--- Deployment finished successfully! ---"
+            # Create the production .env file from GitHub Secrets
+            echo "--- Creating .env file on EC2 ---"
+            echo "APP_NAME=Laravel" > .env # Or use a secret: ${{ secrets.APP_NAME }}
+            echo "APP_ENV=production" >> .env
+            echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+            echo "APP_DEBUG=false" >> .env
+            echo "APP_URL=http://${{ secrets.EC2_SSH_HOST }}" >> .env # Replace with your domain if applicable
+
+            echo "LOG_CHANNEL=stack" >> .env
+            echo "LOG_LEVEL=error" >> .env # Recommended for production
+
+            echo "DB_CONNECTION=mysql" >> .env
+            echo "DB_HOST=db" >> .env # IMPORTANT: Use the Docker Compose service name for the DB host
+            echo "DB_PORT=3306" >> .env
+            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+
+            # Add ALL other necessary production environment variables from secrets
+            # Example: echo "PUSHER_APP_KEY=${{ secrets.PUSHER_APP_KEY }}" >> .env
+            # Example: echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
+            # --- Add all other variables your app needs ---
+            echo "MIX_PUSHER_APP_KEY=\${PUSHER_APP_KEY}" >> .env # Ensure MIX vars are present if needed by frontend JS
+            echo "MIX_PUSHER_APP_CLUSTER=\${PUSHER_APP_CLUSTER}" >> .env
+
+            echo "--- Pulling latest Docker images from Docker Hub ---"
+            docker-compose pull
+
+            echo "--- Stopping any running containers defined in docker-compose.yml ---"
+            docker-compose down --remove-orphans
+
+            echo "--- Starting new containers in detached mode ---"
+            docker-compose up -d
+
+            # Wait a few seconds for containers (especially DB) to initialize
+            echo "--- Waiting for containers to start... ---"
+            sleep 15
+
+            echo "--- Running database migrations ---"
+            # Use -T to avoid TTY allocation issues in non-interactive shells
+            docker-compose exec -T app php artisan migrate --force || echo "Migration failed or no migrations to run."
+
+            echo "--- Optimizing Laravel Application ---"
+            docker-compose exec -T app php artisan optimize:clear
+            docker-compose exec -T app php artisan config:cache
+            docker-compose exec -T app php artisan route:cache
+            docker-compose exec -T app php artisan view:cache
+
+            # Optional: Clean up old dangling Docker images (use with caution)
+            # echo "--- Pruning old Docker images ---"
+            # docker image prune -af
+
+            echo "--- Deployment finished successfully! ---"
