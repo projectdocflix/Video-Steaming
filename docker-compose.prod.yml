@@ -7,13 +7,12 @@ services:
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www/html
+    volumes: # <<< ADD THIS SECTION
+      - ./.env:/var/www/html/.env:ro # <<< ADD THIS LINE (maps host ./env to container /var/www/html/.env read-only)
     networks:
       - laravelnet
-    # Expose port 9000 internally for Nginx, not needed externally
-    # ports:
-    #   - "9000:9000"
     depends_on:
-      - db # Ensure DB starts before the app attempts to connect
+      - db
 
   # Nginx Web Server Service
   webserver:
@@ -21,12 +20,9 @@ services:
     container_name: laravel_webserver
     restart: unless-stopped
     ports:
-      - "80:80" # Map host port 80 to container port 80
-      # Add - "443:443" if you configure SSL within the container/Nginx config
-    # volumes:
-    #   - .:/var/www/html # Mount code so Nginx can access the public dir
-      # If using SSL certificates:
-      # - ./docker/nginx/certs:/etc/nginx/certs:ro
+      - "80:80"
+    # volumes: # Keep this commented out or removed
+    #   - .:/var/www/html
     networks:
       - laravelnet
     depends_on:
@@ -34,20 +30,20 @@ services:
 
   # MySQL Database Service
   db:
-    image: mysql:8.0 # Use an official MySQL image
+    image: mysql:8.0
     container_name: laravel_db
     restart: unless-stopped
     ports:
-      - "3307:3306" # Map host port 3307 to container port 3306
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} # Provide a root password
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password_change_me}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - dbdata:/var/lib/mysql # Persist database data
+      - dbdata:/var/lib/mysql
     networks:
       - laravelnet
 
