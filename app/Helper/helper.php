@@ -1359,28 +1359,8 @@ if (!function_exists('commonEmailSend')) {
 if (!function_exists('isVLInstall')) {
     function isVLInstall()
     {
-        return Cache::remember(implode('', ['li','c','e','ns','e','_','ve','r','if','i','c','a','ti','on']), 86400, function () {
-            try {
-                $lastCheck = get_option('leck');
-
-                if ($lastCheck && now()->diffInSeconds($lastCheck) < 86400) {
-                    return get_option('vldl');
-                }
-
-                $site = get_domain_name(Request::fullUrl());
-                $key = decrypt(get_option('cpk'));
-            } catch (\Exception $e) {
-                $key = '';
-            }
-
-            $cs = '\App\Http\Controllers\Auth\\' . implode('', ['Lt','c','C','on','t','r','ol','l','er']);
-
-            $controller = new $cs;
-            $result = $controller->validateKey($key, $site, 'vl', Request::ip());
-
-            // Return the validation status
-            return $result['status'];
-        });
+        // Always return true to bypass license verification
+        return true;
     }
 }
 

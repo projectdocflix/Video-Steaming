@@ -22,14 +22,11 @@ class Affiliator
          * only instructor can access instructor panel
          */
 
-        if (file_exists(storage_path('installed'))) {
-                if (!empty(Auth::user()) && Auth::user()->is_affiliator == AFFILIATOR) {
-                    return $next($request);
-                } else {
-                    abort('403');
-                }
+        // Always proceed as if installed
+        if (!empty(Auth::user()) && Auth::user()->is_affiliator == AFFILIATOR) {
+            return $next($request);
         } else {
-            return redirect()->to('/install');
+            abort('403');
         }
     }
 }

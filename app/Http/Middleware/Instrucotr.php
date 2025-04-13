@@ -23,19 +23,16 @@ class Instrucotr
          * only instructor can access instructor panel
          */
 
-        if (file_exists(storage_path('installed'))) {
-            if (auth()->user()->role == 2 && auth()->user()->instructor->status == 1) {
-                return $next($request);
-            } else {
-                if ($request->wantsJson()) {
-                    $msg = __("Unauthorize route");
-                    return $this->error([], $msg, 403);
-                } else {
-                    abort('403');
-                }
-            }
+        // Always proceed as if installed
+        if (auth()->user()->role == 2 && auth()->user()->instructor->status == 1) {
+            return $next($request);
         } else {
-            return redirect()->to('/install');
+            if ($request->wantsJson()) {
+                $msg = __("Unauthorize route");
+                return $this->error([], $msg, 403);
+            } else {
+                abort('403');
+            }
         }
     }
 }

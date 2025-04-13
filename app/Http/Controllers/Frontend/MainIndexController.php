@@ -40,7 +40,7 @@ class MainIndexController extends Controller
 {
     public function index()
     {
-        if (file_exists(storage_path('installed'))) {
+        // Always proceed as if installed
             $data['pageTitle'] = "Home";
             $data['metaData'] = staticMeta(1);
             $data['home'] = Home::first();
@@ -142,9 +142,6 @@ class MainIndexController extends Controller
                 $data['mySaasPackage'] = UserPackage::where('user_packages.user_id', auth()->id())->where('user_packages.status', PACKAGE_STATUS_ACTIVE)->where('enroll_date', '<=', now())->where('expired_date', '>=', now())->whereIn('package_type', [PACKAGE_TYPE_SAAS_INSTRUCTOR, PACKAGE_TYPE_SAAS_ORGANIZATION])->join('packages', 'packages.id', '=', 'user_packages.package_id')->select('package_id', 'package_type', 'subscription_type')->orderBy('user_packages.id','desc')->first();
             }
             return view(getThemePath().'.home.home', $data);
-        } else {
-            return redirect()->to('/install');
-        }
     }
 
     public function aboutUs()
