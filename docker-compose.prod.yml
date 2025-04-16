@@ -8,7 +8,10 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     volumes: 
-      - ./.env:/var/www/html/.env 
+      - ./.env:/var/www/html/.env
+      - public_data:/var/www/html/public
+      - resources_data:/var/www/html/resources
+      - storage_data:/var/www/html/storage
     networks:
       - laravelnet
     depends_on:
@@ -21,8 +24,10 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-    # volumes: # Keep this commented out or removed
-    #   - .:/var/www/html
+    volumes: # Keep this commented out or removed for local development
+      - public_data:/var/www/html/public
+      - resources_data:/var/www/html/resources
+      - storage_data:/var/www/html/storage
     networks:
       - laravelnet
     depends_on:
@@ -55,4 +60,10 @@ networks:
 # Named Volume for Persistent Data
 volumes:
   dbdata:
+    driver: local
+  public_data:
+    driver: local
+  resources_data:
+    driver: local
+  storage_data:
     driver: local
