@@ -236,7 +236,7 @@ class LiveClassController extends Controller
             "topic" => $data['topic'],
             "type" => 2, // 1 => instant, 2 => scheduled, 3 => recurring with no fixed time, 8 => recurring with fixed time
             "duration" => $data['duration'], // in minutes
-            "timezone" => @$zoom->timezone ?? 'Asia/Dhaka', // set your timezone
+            "timezone" => @$zoom->timezone ?? 'America/New_York', // set your timezone
             "start_time" => $this->toZoomTimeFormat($data['start_date']), // set your start time
             "settings" => [
                 'host_video' => @$zoom->host_video ? true : false,

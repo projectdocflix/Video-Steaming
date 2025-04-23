@@ -58,11 +58,11 @@
                                     </tr>
                                     <tr>
                                         <td>Address:</td>
-                                        <td>Khulna, Bangladesh</td>
+                                        <td>Virginia,USA</td>
                                     </tr>
                                     <tr>
                                         <td>Location:</td>
-                                        <td>Dhaka, Bangladesh</td>
+                                        <td>Virginia,USA</td>
                                     </tr>
                                 </table>
                             </div>

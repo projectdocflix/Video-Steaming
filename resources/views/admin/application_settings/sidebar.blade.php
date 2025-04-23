@@ -413,12 +413,12 @@
                     <span>{{ __('Cache Settings') }}</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="{{ route('settings.migrate-settings') }}" class="list-item {{ @$migrateActiveClass }}">
                     <img src="{{ asset('admin/images/heroicon/outline/cog.svg') }}" alt="icon">
                     <span>{{ __('Migrate Settings') }}</span>
                 </a>
-            </li>
+            </li> -->
 
         </ul>
     </div>

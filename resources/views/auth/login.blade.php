@@ -58,7 +58,7 @@
                                 </div>
                             </div>
 
-                            <div class="social-media-login-wrap">
+                            <!-- <div class="social-media-login-wrap">
                                 @if(env('GOOGLE_LOGIN_STATUS') == 1)
                                     <div class="row mb-2">
                                         <div class="col-md-12">
@@ -88,7 +88,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
+                                @endif -->
                                 @if(env('LOGIN_HELP') == 'active')
                                     <div class="table-responsive login-info-table mt-3">
                                         <table class="table table-bordered">

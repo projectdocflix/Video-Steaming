@@ -942,12 +942,12 @@
                                 <span>{{__('Cache Settings')}}</span>
                             </a>
                         </li>
-                        <li class="{{ @$subNavMigrateActiveClass }}">
+                        <!-- <li class="{{ @$subNavMigrateActiveClass }}">
                             <a href="{{ route('settings.migrate-settings') }}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{__('Migrate Settings')}}</span>
                             </a>
-                        </li>
+                        </li> -->
 
                     @endcan
                 </ul>
@@ -1122,14 +1122,14 @@
             </ul>
         </li>
         @endif
-        @can('manage_version_update')
+        <!-- @can('manage_version_update')
             <li class="{{ @$subNavVersionUpdateActiveClass }}">
                 <a href="{{ route('settings.file-version-update') }}">
                     <i class="fa fa-circle"></i>
                     <span>{{__('Version Update')}}</span>
                 </a>
             </li>
-        @endif
+        @endif -->
 
         <li class="mb-5 text-center">
             <a href="#">
