@@ -248,3 +248,7 @@ jobs:
             # docker image prune -af
 
             echo "--- Deployment finished successfully! ---"
+      - name: Display URL in GitHub Actions Summary
+        run: |
+          echo "### ✅ Deployment Completed" >> $GITHUB_STEP_SUMMARY
+          echo "Your app is live at: [http://${{ secrets.EC2_SSH_HOST }}](http://${{ secrets.EC2_SSH_HOST }})" >> $GITHUB_STEP_SUMMARY
