@@ -9,7 +9,9 @@ services:
     working_dir: /var/www/html
     volumes: 
       - ./.env:/var/www/html/.env
-      - public_data:/var/www/html
+      - public_data:/var/www/html/public/uploads
+      - resources_data:/var/www/html/resources
+      - storage_data:/var/www/html/storage
     networks:
       - laravelnet
     depends_on:
@@ -23,7 +25,9 @@ services:
     ports:
       - "80:80"
     volumes: # Keep this commented out or removed for local development
-      - public_data:/var/www/html
+      - public_data:/var/www/html/public/uploads
+      - resources_data:/var/www/html/resources
+      - storage_data:/var/www/html/storage
     networks:
       - laravelnet
     depends_on:
@@ -62,6 +66,4 @@ volumes:
   resources_data:
     driver: local
   storage_data:
-    driver: local
-  config_data:
     driver: local
