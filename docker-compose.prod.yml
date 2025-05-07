@@ -8,9 +8,10 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
-      - public_upload:/var/www/public/uploads
+      - public_upload:/var/www/html/public/uploads
       - ./.env:/var/www/html/.env
       - storage_data:/var/www/html/storage
+      - config_data:/var/www/html/config
     networks:
       - laravelnet
     depends_on:
@@ -25,7 +26,8 @@ services:
       - "80:80"
     volumes: # Keep this commented out or removed for local development
       - storage_data:/var/www/html/storage
-      - public_upload:/var/www/public/uploads
+      - public_upload:/var/www/html/public/uploads
+      - config_data:/var/www/html/config
     networks:
       - laravelnet
     depends_on:
