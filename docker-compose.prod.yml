@@ -7,7 +7,8 @@ services:
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www/html
-    volumes: 
+    volumes:
+      - public_upload:/var/www/public/uploads
       - ./.env:/var/www/html/.env
       - storage_data:/var/www/html/storage
     networks:
@@ -24,6 +25,7 @@ services:
       - "80:80"
     volumes: # Keep this commented out or removed for local development
       - storage_data:/var/www/html/storage
+      - public_upload:/var/www/public/uploads
     networks:
       - laravelnet
     depends_on:
