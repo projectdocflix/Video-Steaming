@@ -7,12 +7,11 @@ services:
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www/html
-    volumes:
+    volumes: 
+      - ./.env:/var/www/html/.env
       - public_data:/var/www/html/public
       - resources_data:/var/www/html/resources
-      - ./.env:/var/www/html/.env
       - storage_data:/var/www/html/storage
-      - config_data:/var/www/html/config
     networks:
       - laravelnet
     depends_on:
@@ -28,8 +27,7 @@ services:
     volumes: # Keep this commented out or removed for local development
       - public_data:/var/www/html/public
       - resources_data:/var/www/html/resources
-      - storage_data:/var/www/html/storage 
-      - config_data:/var/www/html/config
+      - storage_data:/var/www/html/storage
     networks:
       - laravelnet
     depends_on:
