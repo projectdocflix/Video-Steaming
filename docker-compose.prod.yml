@@ -23,8 +23,6 @@ services:
     ports:
       - "80:80"
     volumes: # Keep this commented out or removed for local development
-      - public_data:/var/www/html/public
-      - resources_data:/var/www/html/resources
       - storage_data:/var/www/html/storage
     networks:
       - laravelnet
