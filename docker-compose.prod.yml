@@ -8,7 +8,8 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
-      - public_upload:/var/www/html/public/uploads
+      - public_upload:/var/www/html/public
+      - resources_data:/var/www/html/resources
       - ./.env:/var/www/html/.env
       - storage_data:/var/www/html/storage
       - config_data:/var/www/html/config
@@ -25,8 +26,9 @@ services:
     ports:
       - "80:80"
     volumes: # Keep this commented out or removed for local development
-      - storage_data:/var/www/html/storage
-      - public_upload:/var/www/html/public/uploads
+      - public_upload:/var/www/html/public
+      - resources_data:/var/www/html/resources
+      - storage_data:/var/www/html/storage 
       - config_data:/var/www/html/config
     networks:
       - laravelnet
