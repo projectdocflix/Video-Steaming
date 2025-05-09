@@ -24,6 +24,10 @@ RUN apt-get update && apt-get install -y \
     && pecl install imagick \
     && docker-php-ext-enable imagick
 
+# Adjust source path if needed
+COPY docker/php/conf.d/uploads.ini /usr/local/etc/php/conf.d/uploads.ini 
+
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
