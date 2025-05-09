@@ -10,7 +10,7 @@ services:
     volumes: 
       - ./.env:/var/www/html/.env
       - upload_data:/var/www/html/uploads
-      - public_data:/var/www/html/public/uploads
+      - public_data:/var/www/html/public
       - resources_data:/var/www/html/resources
       - storage_data:/var/www/html/storage
     networks:
@@ -27,7 +27,7 @@ services:
       - "80:80"
     volumes:
       - upload_data:/var/www/html/uploads
-      - public_data:/var/www/html/public/uploads
+      - public_data:/var/www/html/public
       - resources_data:/var/www/html/resources
       - storage_data:/var/www/html/storage
     networks:
