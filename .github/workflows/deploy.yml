@@ -108,7 +108,7 @@ jobs:
 
             echo "BROADCAST_DRIVER=pusher" >> .env
             echo "CACHE_DRIVER=file" >> .env
-            echo "FILESYSTEM_DISK=local" >> .env
+            echo "FILESYSTEM_DISK=aws" >> .env
             echo "QUEUE_CONNECTION=sync" >> .env
             echo "SESSION_DRIVER=file" >> .env
             echo "SESSION_LIFETIME=120" >> .env
