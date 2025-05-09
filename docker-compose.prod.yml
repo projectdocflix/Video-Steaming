@@ -9,7 +9,8 @@ services:
     working_dir: /var/www/html
     volumes: 
       - ./.env:/var/www/html/.env
-      - public_data:/var/www/html/public/uploads
+      - upload_data:/var/www/html/uploads
+      - public_data:/var/www/html/public
       - resources_data:/var/www/html/resources
       - storage_data:/var/www/html/storage
     networks:
@@ -25,7 +26,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - public_data:/var/www/html/public/uploads
+      - upload_data:/var/www/html/uploads
+      - public_data:/var/www/html/public
       - resources_data:/var/www/html/resources
       - storage_data:/var/www/html/storage
     networks:
@@ -66,4 +68,6 @@ volumes:
   resources_data:
     driver: local
   storage_data:
+    driver: local
+  upload_data:
     driver: local
