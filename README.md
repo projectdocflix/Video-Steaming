@@ -1,97 +1,94 @@
-**Video Streaming Platform**
-========================
+# Video Streaming Platform
 
-This repository contains a comprehensive codebase for a web application that appears to be an online learning platform. The platform seems to offer various features such as course management, blog management, user management, and more.
+A production-ready Laravel application for subscription-based video learning. It supports on‑demand video, live classes, subscriptions, multi‑gateway payments, and an admin dashboard.
 
-**Table of Contents**
------------------
+## Features
 
-1. [Project Structure](#project-structure)
-2. [Database Schema](#database-schema)
-3. [Frontend](#frontend)
-4. [Backend](#backend)
-5. [API Documentation](#api-documentation)
-6. [Installation and Setup](#installation-and-setup)
-7. [Contributing](#contributing)
-8. [License](#license)
+- Subscriptions and packages (student/instructor/org support)
+- On-demand video: local, YouTube, Vimeo; SCORM course support
+- Live classes: Agora (WebRTC), Zoom, BigBlueButton, Jitsi, Google Meet
+- Payments via multiple gateways (PayPal, Stripe, Razorpay, Mollie, Paystack, SSLCommerz, Braintree, Iyzipay, BitPay, etc.)
+- API (Laravel Passport), Social login (Google/Facebook/Twitter)
+- Admin panel for content, settings, and users
+- Theming and multi-language support
 
-**Project Structure**
---------------------
+## Tech Stack
 
-The project is organized into the following directories:
+- PHP 8.1, Laravel 9
+- MySQL 8.0
+- Blade, Laravel Mix, Vue 3 (selective)
+- Docker (php-fpm, nginx, mysql)
 
-* `app`: Contains the backend code, including database schema, models, controllers, and routes.
-* `public`: Contains the frontend code, including HTML, CSS, and JavaScript files.
-* `public/admin`: Contains the admin dashboard frontend code.
-* `public/frontend`: Contains the user-facing frontend code.
-* `your_db_backup.sql`: A database backup file.
+## Quick Start
 
-**Database Schema**
--------------------
+### Option A: Docker (recommended)
 
-The database schema is defined in the `app/demo.sql` file. The schema includes tables for:
+1. Copy `.env` from your secure source and adjust values (DB, APP_URL, MAIL, storage):
+   - MySQL inside Docker listens on container port 3306, mapped to host 3307.
+2. Start services:
+   - `docker compose up -d`
+3. Install dependencies and initialize app (inside app container):
+   - `docker exec -it laravel_app bash`
+   - `composer install`
+   - `php artisan key:generate`
+   - `php artisan migrate` (or import `your_db_backup.sql`)
+   - `php artisan storage:link`
+   - (Optional) `php artisan passport:install` for API tokens
+4. Build frontend assets (on host):
+   - `npm ci && npm run dev` (or `npm run prod`)
+5. Open app at `http://localhost` (nginx container maps port 80).
 
-* `blog_categories`
-* `blog_comments`
-* `blog_tags`
-* `blogs`
-* `course_languages`
-* `course_lecture_views`
-* `course_tags`
-* `course_upload_rules`
-* `courses`
-* `menus`
-* `metas`
-* `our_histories`
-* `packages`
-* `skills`
-* `special_promotion_tag_courses`
+### Option B: Manual (no Docker)
 
-**Frontend**
-------------
+1. Prereqs: PHP 8.1, Composer 2, Node 18+, MySQL 8.0
+2. Install PHP deps: `composer install`
+3. Copy `.env`, set `APP_URL`, DB, MAIL, storage, etc.
+4. `php artisan key:generate`
+5. DB: `php artisan migrate` (or import `your_db_backup.sql`)
+6. `php artisan storage:link`
+7. Frontend: `npm ci && npm run dev`
+8. Serve: `php artisan serve` (or your preferred web server)
 
-The frontend is built using HTML, CSS, and JavaScript. The code is organized into the following directories:
+## Environment Variables (minimum)
 
-* `public/admin/styles`: Contains CSS files for the admin dashboard.
-* `public/frontend/assets/css`: Contains CSS files for the user-facing frontend.
-* `public/frontend/assets/js`: Contains JavaScript files for the user-facing frontend.
+- Core: `APP_NAME`, `APP_ENV`, `APP_KEY`, `APP_DEBUG`, `APP_URL`
+- DB: `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
+- Mail: `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_ENCRYPTION`, `MAIL_FROM_*`
+- Storage (optional): AWS/Wasabi/Vultr S3-compatible keys
+- Realtime/Video (optional): `agora_app_id`, `agora_app_certificate` (set via Admin Settings), Zoom/BBB keys
+- Payments (as used): gateway keys (PayPal, Stripe, Paystack, SSLCommerz, etc.)
 
-**Backend**
-------------
+See the full list in the handoff doc.
 
-The backend is built using a PHP framework ( likely Laravel). The code is organized into the following directories:
+## NPM & Composer Scripts
 
-* `app/Http/Controllers`: Contains controller classes for handling HTTP requests.
-* `app/Models`: Contains model classes for interacting with the database.
-* `app/Routes`: Contains route definitions for the application.
+- Dev build: `npm run dev`
+- Prod build: `npm run prod`
+- Watch: `npm run watch`
+- PHP tests: `php artisan test`
 
-**API Documentation**
-----------------------
+## Testing
 
-API documentation is not provided in this repository. However, the API endpoints can be inferred from the route definitions in `app/Routes`.
+- Run test suite: `php artisan test`
+- Configure test DB in `.env.testing` or use sqlite in-memory.
 
-**Installation and Setup**
--------------------------
+## Deployment Notes
 
-To install and set up the project, follow these steps:
+- Build assets with `npm run prod`
+- Cache config/routes/views: `php artisan config:cache && php artisan route:cache && php artisan view:cache`
+- Ensure queue workers are running if `QUEUE_CONNECTION` ≠ `sync`
+- Use object storage for media at scale; prefer Redis for cache/session/queues
 
-1. Clone the repository: `git clone https://github.com/your-username/your-repo-name.git`
-2. Install dependencies: `composer install`
-3. Set up the database: `php artisan migrate`
-4. Start the development server: `php artisan serve`
+## Security
 
-**Contributing**
---------------
+- Do not commit secrets or `.env`
+- Rotate API keys regularly and manage via environment/Settings
+- Enforce HTTPS in production
 
-Contributions are welcome! To contribute, follow these steps:
+## Documentation
 
-1. Fork the repository: `git fork https://github.com/your-username/your-repo-name.git`
-2. Create a new branch: `git branch feature/your-feature-name`
-3. Make changes and commit: `git commit -m "Your commit message"`
-4. Push changes: `git push origin feature/your-feature-name`
-5. Create a pull request: `git pull-request`
+- Full technical handoff: `Video-Steaming/TECHNICAL_HANDOFF.md` (architecture, setup, payments, streaming, ops)
 
-**License**
-----------
+## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+See the `LICENSE` file for licensing information.
